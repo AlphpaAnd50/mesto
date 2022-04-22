@@ -8,3 +8,23 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media screen and (max-width: 907px) {
+  .footer{
+    width: 581px;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .footer{
+    width: 282px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

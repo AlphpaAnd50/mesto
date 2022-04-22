@@ -6,10 +6,22 @@
   border: none;
   border-radius: 2px;
 
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
   cursor: pointer;
   transition: 0.2s;
 }
 
 .popup__save-button:hover{
   opacity: 0.8;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__save-button{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
