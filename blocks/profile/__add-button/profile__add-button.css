@@ -1,0 +1,14 @@
+.profile__add-button{
+  height: 50px;
+  margin: auto  0 auto auto;
+
+  background-color: black;
+  border: none;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.profile__add-button:hover{
+  opacity: 0.6;
+}

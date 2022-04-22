@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ливадний Андрей Сергеевич">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>mesto</title>
+</head>
+<body class="page">
+
+
+
+  <header class="header">
+    <img class="header__logo" src="./images/logo.svg" alt="место">
+    <div class="header__line"></div>
+  </header>
+
+  <main class="content">
+
+    <section class="profile">
+      <img class="profile__avatar" src="./images/Жак-Ив Кусто.jpg" alt="Жак-Ив Кусто">
+      <div class="profile__info"> 
+        <h1 class="profile__nickname">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button"><img src="./images/Edit Button.svg" alt="Редактировать профиль"></button>
+        <p class="profile__profession">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button"><img src="./images/Add Button.svg" alt="кнопка добавления"></button>
+    </section>
+
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <p class="popup__text">Редактировать профиль</p>
+        <input class="popup__nickname" type="text" value="Жак-Ив Кусто">
+        <input class="popup__profession" type="text" value="Исследователь океана">
+        <button class="popup__save-button">Сохранить</button>
+      </div>
+    </section>
+
+    <section class="elements">
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="">
+        <h2 class="element__text">Карачаевск</h2>
+        <button class="element__like-button"></button>
+      </article>
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="">
+        <h2 class="element__text">Гора Эльбрус</h2>
+        <button class="element__like-button"></button>
+      </article>
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="">
+        <h2 class="element__text">Домбай</button></h2>
+        <button class="element__like-button">
+      </article>
+
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="">
+        <h2 class="element__text">Гора Эльбрус</h2>
+        <button class="element__like-button"></button>
+      </article>
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="">
+        <h2 class="element__text">Домбай</h2>
+          <button class="element__like-button"></button>
+      </article>
+      <article class="element">
+        <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="">
+        <h2 class="element__text">Карачаево-Черкессия</h2>
+        <button class="element__like-button"></button>
+      </article>
+    </section>
+
+  </main>
+
+<footer class="footer"><p class="footer__copyright">© 2020 Mesto Russia</p></footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
