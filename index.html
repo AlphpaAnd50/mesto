@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Ливадний Андрей Сергеевич">
   <link rel="stylesheet" href="./pages/index.css">
-  <title>mesto</title>
+  <title>место</title>
 </head>
 <body class="page">
 
@@ -13,7 +13,6 @@
 
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="место">
-    <div class="header__line"></div>
   </header>
 
   <main class="content">
@@ -22,53 +21,55 @@
       <img class="profile__avatar" src="./images/Жак-ИвКусто.jpg" alt="Жак-Ив Кусто">
       <div class="profile__info"> 
         <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button"></button>
+        <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="profile__add-button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
 
-    <section class="popup">
+    <div class="popup">
       <div class="popup__container">
-        <button class="popup__close-button"></button>
-        <p class="popup__text">Редактировать профиль</p>
-        <input class="popup__nickname" type="text" value="Жак-Ив Кусто">
-        <input class="popup__profession" type="text" value="Исследователь океана">
-        <button class="popup__save-button">Сохранить</button>
+        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+        <h3 class="popup__text">Редактировать профиль</h3>
+        <form class="popup__form" name="editProfile" action="">
+          <input class="popup__input popup__input_nickname" type="text" name="nickname" value="">
+          <input class="popup__input popup__input_profession" type="text" name="profession" value="">
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form>
       </div>
-    </section>
+    </div>
 
     <section class="elements">
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Сентинский храм">
         <h2 class="element__text">Карачаевск</h2>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Закат">
         <h2 class="element__text">Гора Эльбрус</h2>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Гора">
         <h2 class="element__text">Домбай</h2>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
 
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Закат">
         <h2 class="element__text">Гора Эльбрус</h2>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Гора">
         <h2 class="element__text">Домбай</h2>
-          <button class="element__like-button"></button>
+          <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Сентинский храм">
         <h2 class="element__text">Карачаево-Черкессия</h2>
-        <button class="element__like-button"></button>
+        <button class="element__like-button" type="button" aria-label="Нравится"></button>
       </article>
     </section>
 
@@ -76,6 +77,6 @@
 
 <footer class="footer"><p class="footer__copyright">© 2020 Mesto Russia</p></footer>
 
-  <script src="./script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 </html>

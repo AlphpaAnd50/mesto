@@ -1,6 +1,5 @@
 .element__text{
-  /* width: 246px; */
-  margin: 25px 21px 31px 21px;
+  margin: 25px 21px 25px 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

@@ -1,4 +1,4 @@
-.popup__nickname{
+.popup__input{
   height: 27px;
   margin: 54px 0 0;
   border: none;
@@ -7,4 +7,14 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+}
+
+.popup__input:last-of-type {
+  margin: 30px 0 0;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__input{
+    margin: 75px 0 0;
+  }
 }

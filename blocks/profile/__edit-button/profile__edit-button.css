@@ -5,7 +5,8 @@
   object-fit: contain;
 
   background: url(../../../images/Edit\ Button.svg) center no-repeat black;
-  border: none;
+    background-size: 24px;
+    border: none;
   
   cursor: pointer;
   transition: 0.2s;
@@ -19,6 +20,6 @@
   .profile__edit-button{
     width: 18px;
     height: 18px;
-    background: url(../../../images/Edit\ Button\ small.svg) center no-repeat;
+    background-size: 18px;
   }
 }

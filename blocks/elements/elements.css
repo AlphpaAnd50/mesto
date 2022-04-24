@@ -6,15 +6,16 @@
   gap: 20px 17px;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 900px) {
   .elements{
     grid-template-columns: repeat(2, 282px);
   }
   
 }
 
-@media screen and (max-width: 581px) {
+@media screen and (max-width: 600px) {
   .elements{
+    padding-top: 36px;
     grid-template-columns: repeat(1, 282px);
   }
   
