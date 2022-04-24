@@ -20,7 +20,8 @@ function popupInactive() {
   popup.classList.remove('popup_opened');
 }
 
-function editProfile() {
+function editProfile(evt) {
+  evt.preventDefault();
   
   nickname.textContent = popupNickname.value;
   profession.textContent = popupProfession.value;
