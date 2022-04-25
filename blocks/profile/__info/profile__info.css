@@ -4,5 +4,5 @@
   justify-content: start;
   align-items: baseline;
   grid-template-columns: repeat(2, auto);
-  gap: 16px 18px;
+  gap: 0px 18px;
 }
