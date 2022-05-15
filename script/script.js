@@ -1,34 +1,73 @@
-let nickname = document.querySelector('.profile__nickname');
-let profession = document.querySelector('.profile__profession');
-let editButton = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup');
-let closeButton = document.querySelector('.popup__close-button');
-let popupNickname = document.querySelector('.popup__input_type_nickname');
-let popupProfession = document.querySelector('.popup__input_type_profession');
-let profileForm = document.querySelector('.popup__form');
+const nickname = document.querySelector('.profile__nickname');
+const profession = document.querySelector('.profile__profession');
 
-function popupActive() {
+const editButton = document.querySelector('.profile__edit-button');
 
+const addButton = document.querySelector('.profile__add-button');
+
+const closeButton = document.querySelectorAll('.popup__close-button')
+
+const popupProfile = document.querySelector('.popup_type_profile');
+const popupMesto = document.querySelector('.popup_type_mesto');
+
+const cards = document.querySelector('.elements');
+// const likeButton = document.querySelector('.element__like-button');
+
+
+function popupActive(popup) {
   popup.classList.add('popup_opened');
 
-  popupNickname.value = nickname.textContent;
-  popupProfession.value = profession.textContent;
+  if (popup===popupProfile) {
+    popupProfile.querySelector('.popup__input_type_nickname').value = nickname.textContent;
+    popupProfile.querySelector('.popup__input_type_profession').value = profession.textContent;
+  } else if (popup===popupMesto) {
+    popupMesto.querySelector('.popup__input_type_title').value = '';
+    popupMesto.querySelector('.popup__input_type_Link').value = '';
+  }
 }
 
-function popupInactive() {
-
+function popupClose(popup) {
   popup.classList.remove('popup_opened');
 }
 
 function editProfile(evt) {
-  evt.preventDefault();
-  
-  nickname.textContent = popupNickname.value;
-  profession.textContent = popupProfession.value;
+  evt.preventDefault()
 
-  popupInactive();
+  nickname.textContent = popupProfile.querySelector('.popup__input_type_nickname').value;
+  profession.textContent = popupProfile.querySelector('.popup__input_type_profession').value;
+
+  popupClose(popupProfile)
+} 
+
+function addMesto(evt) {
+  evt.preventDefault()
+  
+  const cardTemplate = document.querySelector('#element-template').content;
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+
+  cardElement.querySelector('.element__image').src = popupMesto.querySelector('.popup__input_type_Link').value;
+  cardElement.querySelector('.element__text').textContent = popupMesto.querySelector('.popup__input_type_title').value;
+
+  cards.prepend(cardElement)
+
+  popupClose(popupMesto)
 }
 
-editButton.addEventListener('click', popupActive);
-closeButton.addEventListener('click', popupInactive);
-profileForm.addEventListener('submit', editProfile);
+editButton.addEventListener('click', ()=> popupActive(popupProfile));
+addButton.addEventListener('click', ()=> popupActive(popupMesto));
+popupProfile.querySelector('.popup__close-button').addEventListener('click', ()=> popupClose(popupProfile));
+popupMesto.querySelector('.popup__close-button').addEventListener('click', ()=> popupClose(popupMesto));
+popupProfile.querySelector('.popup__form').addEventListener('submit', editProfile);
+popupMesto.querySelector('.popup__form').addEventListener('submit', addMesto);
+
+const likeButton = Array.from(document.querySelector('.element__like-button'));
+
+
+function likeActive() {
+  likeButton.classList.add('element__like-button_active')
+}
+
+likeButton.forEach((button)=>button.addEventListener('click', ()=>button.classList.toggle('element__like-button_active')))
+
+
+likeButton.classList.add('element__like-button_active')
