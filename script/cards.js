@@ -38,6 +38,7 @@ function addСard() {
 
     cardElement.querySelector('.element__like-button').addEventListener('click', likeActive)
     cardElement.querySelector('.element__delete-button').addEventListener('click', cardClose)
+    cardElement.querySelector('.element__image').addEventListener('click', imageOpen)
 
     cards.append(cardElement)
   }
