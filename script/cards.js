@@ -36,7 +36,7 @@ function addСard() {
     cardElement.querySelector('.element__image').src = initialCards[i].link
     cardElement.querySelector('.element__text').textContent = initialCards[i].name
 
-    // cardElement.querySelector('.element__like-button').addEventListener('click', (evt)=>{evt.target.classList.toggle('element__like-button_active')})
+    cardElement.querySelector('.element__like-button').addEventListener('click', (evt)=>evt.target.classList.toggle('element__like-button_active'))
 
     cards.append(cardElement)
   }

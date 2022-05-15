@@ -11,7 +11,6 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const popupMesto = document.querySelector('.popup_type_mesto');
 
 const cards = document.querySelector('.elements');
-// const likeButton = document.querySelector('.element__like-button');
 
 
 function popupActive(popup) {
@@ -48,6 +47,8 @@ function addMesto(evt) {
   cardElement.querySelector('.element__image').src = popupMesto.querySelector('.popup__input_type_Link').value;
   cardElement.querySelector('.element__text').textContent = popupMesto.querySelector('.popup__input_type_title').value;
 
+  cardElement.querySelector('.element__like-button').addEventListener('click', (evt)=>evt.target.classList.toggle('element__like-button_active'))
+
   cards.prepend(cardElement)
 
   popupClose(popupMesto)
@@ -55,19 +56,13 @@ function addMesto(evt) {
 
 editButton.addEventListener('click', ()=> popupActive(popupProfile));
 addButton.addEventListener('click', ()=> popupActive(popupMesto));
+
 popupProfile.querySelector('.popup__close-button').addEventListener('click', ()=> popupClose(popupProfile));
 popupMesto.querySelector('.popup__close-button').addEventListener('click', ()=> popupClose(popupMesto));
+
 popupProfile.querySelector('.popup__form').addEventListener('submit', editProfile);
 popupMesto.querySelector('.popup__form').addEventListener('submit', addMesto);
 
-const likeButton = Array.from(document.querySelector('.element__like-button'));
 
 
-function likeActive() {
-  likeButton.classList.add('element__like-button_active')
-}
 
-likeButton.forEach((button)=>button.addEventListener('click', ()=>button.classList.toggle('element__like-button_active')))
-
-
-likeButton.classList.add('element__like-button_active')
