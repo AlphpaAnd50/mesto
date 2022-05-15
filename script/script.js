@@ -38,6 +38,14 @@ function editProfile(evt) {
   popupClose(popupProfile)
 } 
 
+function likeActive(evt) {
+  evt.target.classList.toggle('element__like-button_active')
+}
+
+function cardClose(evt) {
+  evt.target.closest('.element').remove();
+}
+
 function addMesto(evt) {
   evt.preventDefault()
   
@@ -47,7 +55,8 @@ function addMesto(evt) {
   cardElement.querySelector('.element__image').src = popupMesto.querySelector('.popup__input_type_Link').value;
   cardElement.querySelector('.element__text').textContent = popupMesto.querySelector('.popup__input_type_title').value;
 
-  cardElement.querySelector('.element__like-button').addEventListener('click', (evt)=>evt.target.classList.toggle('element__like-button_active'))
+  cardElement.querySelector('.element__like-button').addEventListener('click', likeActive)
+  cardElement.querySelector('.element__delete-button').addEventListener('click', cardClose)
 
   cards.prepend(cardElement)
 
