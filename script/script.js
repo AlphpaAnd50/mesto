@@ -17,6 +17,11 @@ const cards = document.querySelector('.elements');
 function popupActive(popup) {
   popup.classList.add('popup_opened');
 
+  setTimeout(() => {
+    popup.style.opacity = '1' 
+  }, 1);
+  
+
   if (popup===popupProfile) {
     popupProfile.querySelector('.popup__input_type_nickname').value = nickname.textContent;
     popupProfile.querySelector('.popup__input_type_profession').value = profession.textContent;
@@ -27,7 +32,11 @@ function popupActive(popup) {
 }
 
 function popupClose(popup) {
-  popup.classList.remove('popup_opened');
+  popup.style.opacity = '0'
+  setTimeout(() => {
+    popup.classList.remove('popup_opened');
+  }, 500);
+  
 }
 
 function editProfile(evt) {
