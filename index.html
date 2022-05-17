@@ -27,43 +27,45 @@
       <button class="profile__add-button" type="button"></button>
     </section>
 
-    <div class="popup popup_type_profile">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-        <h3 class="popup__text">Редактировать профиль</h3>
-        <form class="popup__form" name="editProfile">
-          <input class="popup__input popup__input_type_nickname" type="text" name="nickname" value="">
-          <input class="popup__input popup__input_type_profession" type="text" name="profession" value="">
-          <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
 
-    <div class="popup popup_type_mesto">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-        <h3 class="popup__text">Новое место</h3>
-        <form class="popup__form" name="editProfile">
-          <input class="popup__input popup__input_type_title" type="text" name="title" id="title" placeholder="Название" value="">
-          <input class="popup__input popup__input_type_Link" type="url" name="Link" id="Link" placeholder="Ссылка на картинку" value="">
-          <button class="popup__save-button" type="submit">Создать</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="popup popup_type_image">
-      <div class="popup__container-image">
-        <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
-        <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="">
-      </div>
-   
-    </div>
 
     <section class="elements">
       
     </section>
 
   </main>
+
+  <div class="popup popup_type_profile">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+      <h3 class="popup__text">Редактировать профиль</h3>
+      <form class="popup__form" name="editProfile">
+        <input class="popup__input popup__input_type_nickname" type="text" name="nickname" value="">
+        <input class="popup__input popup__input_type_profession" type="text" name="profession" value="">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_mesto">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+      <h3 class="popup__text">Новое место</h3>
+      <form class="popup__form" name="editProfile">
+        <input class="popup__input popup__input_type_title" type="text" name="title" id="title" placeholder="Название" value="">
+        <input class="popup__input popup__input_type_Link" type="url" name="Link" id="Link" placeholder="Ссылка на картинку" value="">
+        <button class="popup__save-button" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_image">
+    <div class="popup__container-image">
+      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="">
+    </div>
+
+  </div>
 
 <footer class="footer"><p class="footer__copyright">© 2020 Mesto Russia</p></footer>
 
@@ -76,9 +78,7 @@
   </article>
 </template>
 
-<script src="./script/script.js"></script>
 <script src="./script/cards.js"></script>
-<!-- <script src="./script/popupProfile.js"></script>
-<script src="./script/popupMesto.js"></script> -->
+<script src="./script/index.js"></script>
 </body>
 </html>

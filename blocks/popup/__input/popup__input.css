@@ -9,6 +9,10 @@
   line-height: 17px;
 }
 
+.popup__input:required{
+  border: 1px red solid;
+}
+
 .popup__input:last-of-type {
   margin: 30px 0 0;
 }
