@@ -26,7 +26,6 @@ const cardTemplate = document.querySelector("#element-template").content;
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  // popup.classList.remove("popup_closed")
 
   popupProfileInputNickname.value = nickname.textContent;
   popupProfileInputProfession.value = profession.textContent;
@@ -37,7 +36,6 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  // popup.classList.add("popup_closed");
 }
 
 function editProfile(evt) {

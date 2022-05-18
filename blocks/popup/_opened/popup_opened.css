@@ -1,21 +1,5 @@
 .popup_opened{
-  display: flex;
+  transition: visibility linear .2s, opacity .2s linear;
   opacity: 1;
-
-  animation: popupVisible 0.5s;
-}
-
-@keyframes popupVisible {
-  0% {
-    display: none;
-    opacity: 0;
-  }
-  1% {
-    display: flex;
-    opacity: 0;
-  }
-  100% {
-    display: flex;
-    opacity: 1;
-  }
+  visibility: visible;
 }
