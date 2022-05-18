@@ -1,4 +1,6 @@
 .popup__image{
-  max-width: calc(100vw - 90px);
-  max-height: calc(100vh - 90px);
+  max-width: calc(100vw - 180px);
+  max-height: calc(100vh - 180px);
+  object-fit: contain;
+  box-sizing: border-box;
 }
