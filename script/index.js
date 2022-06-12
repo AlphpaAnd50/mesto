@@ -6,18 +6,13 @@ const buttonEditProfile = document.querySelector(".profile__edit-button");
 const buttonAddСards = document.querySelector(".profile__add-button");
 
 const popupProfile = document.querySelector(".popup_type_profile");
-const popupProfileInputNickname = popupProfile.querySelector(
-  ".popup__input_type_nickname"
-);
-const popupProfileInputProfession = popupProfile.querySelector(
-  ".popup__input_type_profession"
-);
+const popupProfileInputNickname = popupProfile.querySelector("#nickname-input");
+const popupProfileInputProfession =
+  popupProfile.querySelector("#profession-input");
 
 const popupMesto = document.querySelector(".popup_type_mesto");
-const popupMestoInputTitle = popupMesto.querySelector(
-  ".popup__input_type_title"
-);
-const popupMestoInputLink = popupMesto.querySelector(".popup__input_type_Link");
+const popupMestoInputTitle = popupMesto.querySelector("#title-input");
+const popupMestoInputLink = popupMesto.querySelector("#link-input");
 
 const popupImage = document.querySelector(".popup_type_image");
 const image = popupImage.querySelector(".popup__image");
@@ -31,19 +26,19 @@ const cardTemplate = document.querySelector("#element-template").content;
 function openPopupProfile() {
   popupProfileInputNickname.value = nickname.textContent;
   popupProfileInputProfession.value = profession.textContent;
-  openPopup(popupProfile)
+  openPopup(popupProfile);
 }
 
 function openPopupMesto() {
   popupMestoInputTitle.value = "";
   popupMestoInputLink.value = "";
-  openPopup(popupMesto)
+  openPopup(popupMesto);
 }
 
-function openPopupImage(link ,text) {
+function openPopupImage(link, text) {
   image.src = link.src;
   image.alt = link.alt;
-  textImage.textContent = text.textContent
+  textImage.textContent = text.textContent;
 
   openPopup(popupImage);
 }
@@ -60,9 +55,7 @@ function closePopup(popup) {
 
 //Функция редактирования профиля
 
-function editProfile(evt) {
-  evt.preventDefault();
-
+function editProfile() {
   nickname.textContent = popupProfileInputNickname.value;
   profession.textContent = popupProfileInputProfession.value;
 
@@ -81,18 +74,18 @@ function removeСard(evt) {
   evt.target.closest(".element").remove();
 }
 
-//Добовление 6 карточек 
+//Добовление 6 карточек
 
 initialCards.forEach((element) => {
-  cards.prepend(createCard(element.link, element.name))
+  cards.prepend(createCard(element.link, element.name));
 });
 
 //Функция добавления карточки
 
-function addCard(evt) {
-  evt.preventDefault();
-
-  cards.prepend(createCard(popupMestoInputLink.value, popupMestoInputTitle.value));
+function addCard() {
+  cards.prepend(
+    createCard(popupMestoInputLink.value, popupMestoInputTitle.value)
+  );
   closePopup(popupMesto);
 }
 
@@ -113,15 +106,24 @@ function createCard(link, name) {
   cardElement
     .querySelector(".element__delete-button")
     .addEventListener("click", removeСard);
-  imageElement.addEventListener("click", ()=>openPopupImage(imageElement, textElement));
+  imageElement.addEventListener("click", () =>
+    openPopupImage(imageElement, textElement)
+  );
 
-  return cardElement
+  return cardElement;
 }
 
 //Слушатели событий
 
-buttonEditProfile.addEventListener("click", () => openPopupProfile(popupProfile));
-buttonAddСards.addEventListener("click", () => openPopupMesto(popupMesto));
+buttonEditProfile.addEventListener("click", () => {
+  openPopupProfile(popupProfile);
+  enableValidation();
+});
+
+buttonAddСards.addEventListener("click", () => {
+  openPopupMesto(popupMesto);
+  enableValidation();
+});
 
 popupProfile
   .querySelector(".popup__close-button")
@@ -133,7 +135,30 @@ popupImage
   .querySelector(".popup__close-button")
   .addEventListener("click", () => closePopup(popupImage));
 
-popupProfile
-  .querySelector(".popup__form")
-  .addEventListener("submit", editProfile);
-popupMesto.querySelector(".popup__form").addEventListener("submit", addCard);
+popupProfile.addEventListener("click", () => {
+  closePopup(popupProfile);
+});
+popupMesto.addEventListener("click", () => {
+  closePopup(popupMesto);
+});
+popupImage.addEventListener("click", () => {
+  closePopup(popupImage);
+});
+
+document.addEventListener("keyup", (evt) => {
+  if (evt.key === "Escape") {
+    closePopup(popupProfile);
+    closePopup(popupMesto);
+    closePopup(popupImage);
+  }
+});
+
+popupProfile.querySelector(".form").addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  editProfile();
+});
+
+popupMesto.querySelector(".form").addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  addCard();
+});
