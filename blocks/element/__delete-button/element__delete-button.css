@@ -10,4 +10,10 @@
   top: 20px;
 
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.element__delete-button:hover{
+  opacity: 0.5;
+
 }

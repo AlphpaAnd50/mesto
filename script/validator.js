@@ -1,3 +1,6 @@
+const formList = Array.from(document.querySelectorAll(".form"));console.log(formList);
+
+console.log(formList2 = Object.getOwnPropertyNames(document.querySelectorAll(".form")))
 
 //Функция появление ошибки
 function showInputError(formElement, inputElement, errorMessage) {
@@ -41,10 +44,9 @@ function setEventListeners(formElement) {
 }
 
 //Функция    включить проверку
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(".form"));
+function enableValidation(formList) {
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {console.log(formElement);
+    formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
     setEventListeners(formElement);
@@ -62,8 +64,11 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add("form__save-button_inactive");
+    buttonElement.disabled = true
   } else {
     buttonElement.classList.remove("form__save-button_inactive");
+    buttonElement.disabled = false
   }
 }
 
+enableValidation(formList);

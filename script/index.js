@@ -22,7 +22,6 @@ const cards = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#element-template").content;
 
 //Функции открытия попапов
-
 function openPopupProfile() {
   popupProfileInputNickname.value = nickname.textContent;
   popupProfileInputProfession.value = profession.textContent;
@@ -45,16 +44,23 @@ function openPopupImage(link, text) {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keyup", doSomething);
 }
 
 //Функция закрытия попапов
-
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keyup", doSomething);
+}
+
+//Функция закрытия на ESC
+function doSomething(evt) {
+  if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
 }
 
 //Функция редактирования профиля
-
 function editProfile() {
   nickname.textContent = popupProfileInputNickname.value;
   profession.textContent = popupProfileInputProfession.value;
@@ -117,12 +123,10 @@ function createCard(link, name) {
 
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile(popupProfile);
-  enableValidation();
 });
 
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto(popupMesto);
-  enableValidation();
 });
 
 popupProfile
@@ -135,20 +139,18 @@ popupImage
   .querySelector(".popup__close-button")
   .addEventListener("click", () => closePopup(popupImage));
 
-popupProfile.addEventListener("click", () => {
-  closePopup(popupProfile);
-});
-popupMesto.addEventListener("click", () => {
-  closePopup(popupMesto);
-});
-popupImage.addEventListener("click", () => {
-  closePopup(popupImage);
-});
-
-document.addEventListener("keyup", (evt) => {
-  if (evt.key === "Escape") {
+popupProfile.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup")) {
     closePopup(popupProfile);
+  }
+});
+popupMesto.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup")) {
     closePopup(popupMesto);
+  }
+});
+popupImage.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup")) {
     closePopup(popupImage);
   }
 });
