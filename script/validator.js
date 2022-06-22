@@ -1,6 +1,4 @@
-const formList = Array.from(document.querySelectorAll(".form"));console.log(formList);
-
-console.log(formList2 = Object.getOwnPropertyNames(document.querySelectorAll(".form")))
+const formList = Array.from(document.querySelectorAll(".form"));
 
 //Функция появление ошибки
 function showInputError(formElement, inputElement, errorMessage) {
