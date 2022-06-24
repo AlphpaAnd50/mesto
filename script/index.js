@@ -21,9 +21,6 @@ const textImage = popupImage.querySelector(".popup__image-text");
 const cards = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#element-template").content;
 
-popupProfileInputNickname.value = nickname.textContent;
-popupProfileInputProfession.value = profession.textContent;
-
 //Функции открытия попапов
 function openPopupProfile() {
   popupProfileInputNickname.value = nickname.textContent;
