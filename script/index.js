@@ -80,15 +80,15 @@ function editProfile() {
 
 //Функция лайка
 
-function activeLike(evt) {
+/* function activeLike(evt) {
   evt.target.classList.toggle("element__like-button_active");
-}
+} */
 
 //Функция удаления карточки
 
-function removeСard(evt) {
+/* function removeСard(evt) {
   evt.target.closest(".element").remove();
-}
+} */
 
 //Функция добавления карточки
 
@@ -182,10 +182,24 @@ class Card {
 
     return this._element;
   }
+
+  _openPopup() {
+    image.src = this._link;
+    textImage = this._name;
+    popupImage.classList.add(".popup_opened");
+  }
+
+  _setEventListeners() {
+    const image = this._element.querySelector(".element__image"); console.log(image);
+    image.addEventListener("click", () => {
+      this._openPopup();
+      
+    });
+  }
 }
 
 //Рендер карточек
-function renderCards(Cards) {console.log(Cards);
+function renderCards(Cards) {
   Cards.forEach((item) => {
     const card = new Card(item.name, item.link);
 
@@ -199,7 +213,7 @@ renderCards(initialCards);
 
 //Добовление карточек
 function addCard() {
-  const card = [{name: popupMestoInputTitle.value, link: popupMestoInputLink.value}];
+  const card = [{ name: popupMestoInputTitle.value, link: popupMestoInputLink.value }];
   renderCards(card);
   closePopup(popupMesto);
 }
