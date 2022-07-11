@@ -184,24 +184,22 @@ class Card {
   }
 }
 
-//Добовление карточек
-function renderCards(Cards) {
+//Рендер карточек
+function renderCards(Cards) {console.log(Cards);
   Cards.forEach((item) => {
     const card = new Card(item.name, item.link);
 
     const cardElement = card.generateCard();
-    cards.append(cardElement);
+    cards.prepend(cardElement);
   });
 }
 
 //Добовление 6 карточек
-renderCards(initialCards);console.log(initialCards)
+renderCards(initialCards);
 
+//Добовление карточек
 function addCard() {
-  const card = new Card({ name: `${popupMestoInputTitle.value}`, link: `${popupMestoInputLink.value}` });
-  // renderCards(card);
-
-  const cardElement = card.generateCard();
-  cards.append(cardElement);console.log(cardElement);
+  const card = [{name: popupMestoInputTitle.value, link: popupMestoInputLink.value}];
+  renderCards(card);
+  closePopup(popupMesto);
 }
-
