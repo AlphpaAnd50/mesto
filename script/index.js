@@ -7,8 +7,7 @@ const buttonAddСards = document.querySelector(".profile__add-button");
 
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupProfileInputNickname = popupProfile.querySelector("#nickname-input");
-const popupProfileInputProfession =
-  popupProfile.querySelector("#profession-input");
+const popupProfileInputProfession = popupProfile.querySelector("#profession-input");
 
 const popupMesto = document.querySelector(".popup_type_mesto");
 const popupMestoInputTitle = popupMesto.querySelector("#title-input");
@@ -30,7 +29,7 @@ function openPopupProfile() {
 
 function openPopupMesto() {
   const button = popupMesto.querySelector(".form__save-button");
-  button.classList.add("form__save-button_inactive")
+  button.classList.add("form__save-button_inactive");
   button.disabled = true;
 
   popupMestoInputTitle.value = "";
@@ -65,9 +64,9 @@ function closePopupEscape(evt) {
 }
 
 // Функция закрытия на нажатие мима формы
-function closePopupClick (evt) {
+function closePopupClick(evt) {
   if (evt.target.classList.contains("popup")) {
-    closePopup(document.querySelector(".popup_opened"))
+    closePopup(document.querySelector(".popup_opened"));
   }
 }
 
@@ -91,24 +90,16 @@ function removeСard(evt) {
   evt.target.closest(".element").remove();
 }
 
-//Добовление 6 карточек
-
-initialCards.forEach((element) => {
-  cards.prepend(createCard(element.link, element.name));
-});
-
 //Функция добавления карточки
 
-function addCard() {
-  cards.prepend(
-    createCard(popupMestoInputLink.value, popupMestoInputTitle.value)
-  );
+/* function addCard() {
+  cards.prepend(createCard(popupMestoInputLink.value, popupMestoInputTitle.value));
   closePopup(popupMesto);
-}
+} */
 
 //Функция создания карточки
 
-function createCard(link, name) {
+/* function createCard(link, name) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const imageElement = cardElement.querySelector(".element__image");
   const textElement = cardElement.querySelector(".element__text");
@@ -128,7 +119,7 @@ function createCard(link, name) {
   );
 
   return cardElement;
-}
+} */
 
 //Слушатели событий
 
@@ -163,3 +154,54 @@ popupMesto.querySelector(".form").addEventListener("submit", (evt) => {
   evt.preventDefault();
   addCard();
 });
+
+//_____________________________________________
+
+import { initialCards } from "./cards.js";
+
+class Card {
+  constructor(name, link) {
+    this._name = name;
+    this._link = link;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+      .querySelector("#element-template")
+      .content.querySelector(".element")
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+
+    this._element.querySelector(".element__text").textContent = this._name;
+    this._element.querySelector(".element__image").src = this._link;
+
+    return this._element;
+  }
+}
+
+//Добовление карточек
+function renderCards(Cards) {
+  Cards.forEach((item) => {
+    const card = new Card(item.name, item.link);
+
+    const cardElement = card.generateCard();
+    cards.append(cardElement);
+  });
+}
+
+//Добовление 6 карточек
+renderCards(initialCards);console.log(initialCards)
+
+function addCard() {
+  const card = new Card({ name: `${popupMestoInputTitle.value}`, link: `${popupMestoInputLink.value}` });
+  // renderCards(card);
+
+  const cardElement = card.generateCard();
+  cards.append(cardElement);console.log(cardElement);
+}
+
