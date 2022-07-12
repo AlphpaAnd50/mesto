@@ -1,5 +1,5 @@
 // Импорт
-
+import { buttonEditProfile, buttonAddСards } from "./index.js";
 
 //Функция появление ошибки
 function showInputError(formElement, inputElement, errorMessage, config) {
@@ -70,17 +70,19 @@ function toggleButtonState(inputList, buttonElement, config) {
   }
 }
 
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__save-button",
-  inactiveButtonClass: "form__save-button_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-});
+// enableValidation({
+//   formSelector: ".form",
+//   inputSelector: ".form__input",
+//   submitButtonSelector: ".form__save-button",
+//   inactiveButtonClass: "form__save-button_inactive",
+//   inputErrorClass: "form__input_type_error",
+//   errorClass: "form__input-error_active",
+// });
+
+export {enableValidation}
 
 //________________________________________________
-import { buttonEditProfile, buttonAddСards } from "./index.js";
+
 
 class FormValidator {
   constructor(config, validationForm) {
@@ -132,12 +134,11 @@ function Validator(isGrid) {
     editProfile
   );
 }
-console.log(buttonEditProfile);
 
-buttonEditProfile.addEventListener("click", () => {
+/* buttonEditProfile.addEventListener("click", () => {
   Validator(true)
 });
 
 buttonAddСards.addEventListener("click", () => {
   Validator(false)
-});
+}); */

@@ -1,5 +1,5 @@
 // Импорт
-import { openPopupImage } from "./index.js";
+import { openPopupImage, popupMestoInputTitle, popupMestoInputLink } from "./index.js";
 
 // Переменне
 const cards = document.querySelector(".elements");

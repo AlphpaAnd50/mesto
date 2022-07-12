@@ -1,6 +1,6 @@
 // Импорт
 import { addCard } from "./Card.js";
-// import * as all from "./FormValidator";
+import { enableValidation } from "./FormValidator.js";
 
 // Переменне
 const nickname = document.querySelector(".profile__nickname");
@@ -78,6 +78,15 @@ function editProfile() {
 
   closePopup(popupProfile);
 }
+
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__save-button",
+  inactiveButtonClass: "form__save-button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+});
 
 // class Card {
 //   constructor(name, link) {
@@ -178,4 +187,10 @@ popupMesto.querySelector(".form").addEventListener("submit", (evt) => {
 });
 
 //Экспорт
-export { buttonEditProfile, buttonAddСards, openPopupImage };
+export {
+  buttonEditProfile,
+  buttonAddСards,
+  openPopupImage,
+  popupMestoInputTitle,
+  popupMestoInputLink,
+};
