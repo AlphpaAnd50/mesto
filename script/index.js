@@ -1,3 +1,6 @@
+// Импорт
+import { initialCards } from "./cards.js";
+
 // Переменне
 const nickname = document.querySelector(".profile__nickname");
 const profession = document.querySelector(".profile__profession");
@@ -76,8 +79,6 @@ function editProfile() {
 
   closePopup(popupProfile);
 }
-
-import { initialCards } from "./cards.js";
 
 class Card {
   constructor(name, link) {
