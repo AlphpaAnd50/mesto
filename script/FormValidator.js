@@ -1,3 +1,6 @@
+// Импорт
+
+
 //Функция появление ошибки
 function showInputError(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -27,9 +30,7 @@ function checkInputValidity(formElement, inputElement, config) {
 
 //Функция установка слушателя событий
 function setEventListeners(formElement, config) {
-  const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
-  );
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const button = formElement.querySelector(config.submitButtonSelector);
   toggleButtonState(inputList, button, config);
   inputList.forEach((inputElement) => {
@@ -76,4 +77,67 @@ enableValidation({
   inactiveButtonClass: "form__save-button_inactive",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
+});
+
+//________________________________________________
+import { buttonEditProfile, buttonAddСards } from "./index.js";
+
+class FormValidator {
+  constructor(config, validationForm) {
+    // this._formSelector = config.formSelector;
+
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
+
+    this._validationForm = validationForm;
+  }
+
+  _getTemplate() {
+    const formElement = document.querySelector(this._validationForm);
+
+    return formElement;
+  }
+
+  enableValidation() {
+    this._element = this._getTemplate;
+  }
+
+  _addEventListener() {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+  }
+}
+
+function Validator(isGrid) {
+
+  if (isGrid === true) {
+    console.log();
+  } else {
+    
+  }
+
+  const name = new FormValidator(
+    {
+      formSelector: ".form",
+      inputSelector: ".form__input",
+      submitButtonSelector: ".form__save-button",
+      inactiveButtonClass: "form__save-button_inactive",
+      inputErrorClass: "form__input_type_error",
+      errorClass: "form__input-error_active",
+    },
+    editProfile
+  );
+}
+console.log(buttonEditProfile);
+
+buttonEditProfile.addEventListener("click", () => {
+  Validator(true)
+});
+
+buttonAddСards.addEventListener("click", () => {
+  Validator(false)
 });
