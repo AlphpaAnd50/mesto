@@ -1,5 +1,11 @@
 // Импорт
-import { openPopupImage, popupMestoInputTitle, popupMestoInputLink } from "./index.js";
+import {
+  openPopupImage,
+  closePopup,
+  popupMesto,
+  popupMestoInputTitle,
+  popupMestoInputLink,
+} from "./index.js";
 
 // Переменне
 const cards = document.querySelector(".elements");

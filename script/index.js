@@ -1,6 +1,6 @@
 // Импорт
 import { addCard } from "./Card.js";
-import { enableValidation } from "./FormValidator.js";
+import { Validator } from "./FormValidator.js";
 
 // Переменне
 const nickname = document.querySelector(".profile__nickname");
@@ -79,87 +79,16 @@ function editProfile() {
   closePopup(popupProfile);
 }
 
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__save-button",
-  inactiveButtonClass: "form__save-button_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-});
-
-// class Card {
-//   constructor(name, link) {
-//     this._name = name;
-//     this._link = link;
-//   }
-
-//   _getTemplate() {
-//     const cardElement = document
-//       .querySelector("#element-template")
-//       .content.querySelector(".element")
-//       .cloneNode(true);
-
-//     return cardElement;
-//   }
-//   // Создание карточки
-//   generateCard() {
-//     this._element = this._getTemplate();
-//     this._setEventListeners();
-
-//     this._element.querySelector(".element__text").textContent = this._name;
-//     this._element.querySelector(".element__image").src = this._link;
-
-//     return this._element;
-//   }
-
-//   _setEventListeners() {
-//     const image = this._element.querySelector(".element__image");
-//     const likeButton = this._element.querySelector(".element__like-button");
-//     const removeButton = this._element.querySelector(".element__delete-button");
-//     // Открыте картинки
-//     image.addEventListener("click", () => {
-//       openPopupImage(this._link, this._name);
-//     });
-//     // Лайк
-//     likeButton.addEventListener("click", (evt) => {
-//       evt.target.classList.toggle("element__like-button_active");
-//     });
-//     // Удаление карточки
-//     removeButton.addEventListener("click", (evt) => {
-//       evt.target.closest(".element").remove();
-//     });
-//   }
-// }
-
-// //Рендер карточек
-// function renderCards(Cards) {
-//   Cards.forEach((item) => {
-//     const card = new Card(item.name, item.link);
-
-//     const cardElement = card.generateCard();
-//     cards.prepend(cardElement);
-//   });
-// }
-
-// //Добовление 6 карточек
-// renderCards(initialCards);
-
-// // Добовление карточек
-// function addCard() {
-//   const card = [{ name: popupMestoInputTitle.value, link: popupMestoInputLink.value }];
-//   renderCards(card);
-//   closePopup(popupMesto);
-// }
-
 //Слушатели событий
 
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile(popupProfile);
+  Validator(true);
 });
 
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto(popupMesto);
+  Validator(false);
 });
 
 popupProfile
@@ -193,4 +122,6 @@ export {
   openPopupImage,
   popupMestoInputTitle,
   popupMestoInputLink,
+  closePopup,
+  popupMesto,
 };
