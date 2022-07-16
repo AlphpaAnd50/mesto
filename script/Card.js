@@ -1,14 +1,7 @@
 // Импорт
-import {
-  openPopupImage,
-  closePopup,
-  popupMesto,
-  popupMestoInputTitle,
-  popupMestoInputLink,
-} from "./index.js";
+import { openPopupImage } from "./index.js";
 
 // Переменне
-const cards = document.querySelector(".elements");
 
 const initialCards = [
   {
@@ -38,14 +31,16 @@ const initialCards = [
 ];
 
 class Card {
-  constructor(name, link) {
-    this._name = name;
-    this._link = link;
-  }
+  constructor(item, selectorTemplate) {
+    this._name = item.name;
+    this._link = item.link;
 
+    this._selectorTemplate = selectorTemplate
+  }
+  //
   _getTemplate() {
     const cardElement = document
-      .querySelector("#element-template")
+      .querySelector(this._selectorTemplate)
       .content.querySelector(".element")
       .cloneNode(true);
 
@@ -57,11 +52,12 @@ class Card {
     this._setEventListeners();
 
     this._element.querySelector(".element__text").textContent = this._name;
+    this._element.querySelector(".element__image").alt = this._name;
     this._element.querySelector(".element__image").src = this._link;
 
     return this._element;
   }
-
+  // Слушатели
   _setEventListeners() {
     const image = this._element.querySelector(".element__image");
     const likeButton = this._element.querySelector(".element__like-button");
@@ -81,24 +77,4 @@ class Card {
   }
 }
 
-//Рендер карточек
-function renderCards(Cards) {
-  Cards.forEach((item) => {
-    const card = new Card(item.name, item.link);
-
-    const cardElement = card.generateCard();
-    cards.prepend(cardElement);
-  });
-}
-
-//Добовление 6 карточек
-renderCards(initialCards);
-
-//Добовление карточек
-function addCard() {
-  const card = [{ name: popupMestoInputTitle.value, link: popupMestoInputLink.value }];
-  renderCards(card);
-  closePopup(popupMesto);
-}
-
-export { addCard };
+export { Card, initialCards };

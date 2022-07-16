@@ -1,6 +1,6 @@
 // Импорт
-import { addCard } from "./Card.js";
-import { Validator } from "./FormValidator.js";
+import { Card, initialCards } from "./Card.js";
+import { FormValidator, config } from "./FormValidator.js";
 
 // Переменне
 const nickname = document.querySelector(".profile__nickname");
@@ -14,6 +14,7 @@ const popupProfileInputNickname = popupProfile.querySelector("#nickname-input");
 const popupProfileInputProfession = popupProfile.querySelector("#profession-input");
 
 const popupMesto = document.querySelector(".popup_type_mesto");
+const form = popupMesto.querySelector(".form");
 const popupMestoInputTitle = popupMesto.querySelector("#title-input");
 const popupMestoInputLink = popupMesto.querySelector("#link-input");
 
@@ -21,21 +22,24 @@ const popupImage = document.querySelector(".popup_type_image");
 const image = popupImage.querySelector(".popup__image");
 const textImage = popupImage.querySelector(".popup__image-text");
 
+const cards = document.querySelector(".elements");
+
+const formChangeProfile = new FormValidator(config, changeProfile);
+const formAddMesto = new FormValidator(config, addMesto);
+
 //Функции открытия попапов
 function openPopupProfile() {
   popupProfileInputNickname.value = nickname.textContent;
   popupProfileInputProfession.value = profession.textContent;
   openPopup(popupProfile);
+  formChangeProfile.resetValidation();
 }
 
 function openPopupMesto() {
-  const button = popupMesto.querySelector(".form__save-button");
-  button.classList.add("form__save-button_inactive");
-  button.disabled = true;
-
-  popupMestoInputTitle.value = "";
-  popupMestoInputLink.value = "";
+  console.log(popupMesto);
   openPopup(popupMesto);
+  form.reset();
+  formAddMesto.resetValidation();
 }
 
 function openPopupImage(link, text) {
@@ -79,16 +83,47 @@ function editProfile() {
   closePopup(popupProfile);
 }
 
+//Рендер карточек
+function renderCards(Cards) {
+  Cards.forEach((item) => {
+    const card = new Card(item, "#element-template");
+
+    const cardElement = card.generateCard();
+    cards.append(cardElement);
+  });
+}
+// Создание новой карточки
+function createCard(item) {
+  const card = new Card(item, "#element-template");
+
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+//Добовление 6 карточек
+renderCards(initialCards);
+
+//Добовление карточки
+function addCard() {
+  const card = { name: popupMestoInputTitle.value, link: popupMestoInputLink.value };
+  cards.prepend(createCard(card));
+  closePopup(popupMesto);
+}
+
+function Validator() {
+  formChangeProfile.enableValidation();
+  formAddMesto.enableValidation();
+}
+
+Validator();
 //Слушатели событий
 
 buttonEditProfile.addEventListener("click", () => {
-  openPopupProfile(popupProfile);
-  Validator(true);
+  openPopupProfile();
 });
 
 buttonAddСards.addEventListener("click", () => {
-  openPopupMesto(popupMesto);
-  Validator(false);
+  openPopupMesto();
 });
 
 popupProfile
@@ -116,12 +151,4 @@ popupMesto.querySelector(".form").addEventListener("submit", (evt) => {
 });
 
 //Экспорт
-export {
-  buttonEditProfile,
-  buttonAddСards,
-  openPopupImage,
-  popupMestoInputTitle,
-  popupMestoInputLink,
-  closePopup,
-  popupMesto,
-};
+export { openPopupImage, popupMestoInputTitle, popupMestoInputLink, closePopup, popupMesto };

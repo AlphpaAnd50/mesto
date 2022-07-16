@@ -23,6 +23,14 @@ class FormValidator {
   enableValidation() {
     this._addEventListener();
   }
+  //Очищаем ошибки
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputSelector.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
   //Функция появление ошибки
   _showInputError(inputElement) {
     const errorElement = this._validationForm.querySelector(`.${inputElement.id}-error`);
@@ -70,6 +78,7 @@ class FormValidator {
     });
 
     this._inputSelector.forEach((inputElement) => {
+      this._toggleButtonState();
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
@@ -78,13 +87,5 @@ class FormValidator {
   }
 }
 
-function Validator(isGrid) {
-  const form = isGrid
-    ? new FormValidator(config, editProfile)
-    : new FormValidator(config, addMesto);
-
-  form.enableValidation();
-}
-
 // Экспорт
-export { Validator };
+export { FormValidator, config };
