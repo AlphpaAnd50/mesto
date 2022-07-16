@@ -24,6 +24,7 @@ const textImage = popupImage.querySelector(".popup__image-text");
 
 const cards = document.querySelector(".elements");
 
+const card = new Card(item, "#element-template");
 const formChangeProfile = new FormValidator(config, changeProfile);
 const formAddMesto = new FormValidator(config, addMesto);
 
@@ -86,16 +87,12 @@ function editProfile() {
 //Рендер карточек
 function renderCards(Cards) {
   Cards.forEach((item) => {
-    const card = new Card(item, "#element-template");
-
     const cardElement = card.generateCard();
     cards.append(cardElement);
   });
 }
 // Создание новой карточки
 function createCard(item) {
-  const card = new Card(item, "#element-template");
-
   const cardElement = card.generateCard();
   return cardElement;
 }
