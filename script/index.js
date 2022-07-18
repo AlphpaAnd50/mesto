@@ -36,7 +36,6 @@ function openPopupProfile() {
 }
 
 function openPopupMesto() {
-  console.log(popupMesto);
   openPopup(popupMesto);
   form.reset();
   formAddMesto.resetValidation();
@@ -86,10 +85,7 @@ function editProfile() {
 //Рендер карточек
 function renderCards(Cards) {
   Cards.forEach((item) => {
-    const card = new Card(item, "#element-template");
-
-    const cardElement = card.generateCard();
-    cards.append(cardElement);
+    cards.append(createCard(item));
   });
 }
 // Создание новой карточки
