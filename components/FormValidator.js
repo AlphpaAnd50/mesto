@@ -1,7 +1,11 @@
-// Импорт
-import {} from "./index.js";
+// ИМПОРТ
 
-const config = {
+//src
+import {} from "../src/pages/index.js";
+
+//КЛАСС
+
+export const config = {
   inputSelector: ".form__input",
   submitButtonSelector: ".form__save-button",
   inactiveButtonClass: "form__save-button_inactive",
@@ -9,7 +13,7 @@ const config = {
   errorClass: "form__input-error_active",
 };
 
-class FormValidator {
+export class FormValidator {
   constructor(config, validationForm) {
     this._inputSelector = Array.from(validationForm.querySelectorAll(config.inputSelector));
     this._submitButtonSelector = validationForm.querySelector(config.submitButtonSelector);
@@ -86,6 +90,3 @@ class FormValidator {
     });
   }
 }
-
-// Экспорт
-export { FormValidator, config };

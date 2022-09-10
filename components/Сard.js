@@ -1,43 +1,21 @@
-// Импорт
-import { openPopupImage } from "./index.js";
+// ИМПОРТ
 
+//src
+// import { openPopupImage } from "../src/pages/index.js";
 // Переменне
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+//КЛАСС
 
-class Card {
-  constructor(item, selectorTemplate) {
-    this._name = item.name;
-    this._link = item.link;
+export default class Card {
+  constructor({ data , handleCardClick}, selectorTemplate) {
+    this._name = data.name;
+    this._link = data.link;
 
-    this._selectorTemplate = selectorTemplate
+    this._handleCardClick = handleCardClick;
+
+    this._selectorTemplate = selectorTemplate;
   }
-  //
+  //Получение шаблона
   _getTemplate() {
     const cardElement = document
       .querySelector(this._selectorTemplate)
@@ -64,7 +42,7 @@ class Card {
     const removeButton = this._element.querySelector(".element__delete-button");
     // Открыте картинки
     image.addEventListener("click", () => {
-      openPopupImage(this._link, this._name);
+      this._handleCardClick(this._link, this._name);
     });
     // Лайк
     likeButton.addEventListener("click", (evt) => {
@@ -76,5 +54,3 @@ class Card {
     });
   }
 }
-
-export { Card, initialCards };

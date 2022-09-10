@@ -2,7 +2,7 @@
   width: 22px;
   height: 22px;
   margin: auto 20px auto auto;
-  background: url(../../../images/like\ Button.svg) center no-repeat white;
+  background: url(../../../src/images/like\ Button.svg) center no-repeat white;
   border: none;
 
   cursor: pointer;
