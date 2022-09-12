@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Ливадний Андрей Сергеевич">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   <title>место</title>
 </head>
 <body class="page">
@@ -12,13 +12,13 @@
 
 
   <header class="header">
-    <img class="header__logo" src="./images/logo.svg" alt="место">
+    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="место">
   </header>
 
   <main class="content">
 
     <section class="profile">
-      <img class="profile__avatar" src="./images/Жак-ИвКусто.jpg" alt="Жак-Ив Кусто">
+      <img class="profile__avatar" src="<%=require('./images/Жак-ИвКусто.jpg')%>" alt="Жак-Ив Кусто">
       <div class="profile__info"> 
         <h1 class="profile__nickname">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
@@ -96,6 +96,6 @@
   </article>
 </template>
 
-<script type="module" src="../src/pages/index.js"></script>
+<!-- <script type="module" src="../src/pages/index.js"></script> -->
 </body>
 </html>

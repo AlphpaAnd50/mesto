@@ -1,4 +1,5 @@
 // ИМПОРТ
+import "./index.css";
 
 //компоненты
 import Card from "../../components/Сard.js";
