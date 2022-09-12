@@ -16,12 +16,7 @@ import {
   popupProfileInputNickname,
   popupProfileInputProfession,
   popupMesto,
-  form,
-  popupMestoInputTitle,
-  popupMestoInputLink,
   popupImage,
-  image,
-  textImage,
   cards,
   formChangeProfile,
   formAddMesto,
@@ -62,13 +57,11 @@ function openPopupProfile() {
 //Попап место
 function openPopupMesto() {
   popupMestoClass.open();
-  // form.reset();
   formAddMesto.resetValidation();
 }
 
 //Функция закрытия попапов
 function closePopup(popup) {
-  // popupMestoWithFormClass.close();
   popup.classList.remove("popup_opened");
 }
 
@@ -76,8 +69,6 @@ function closePopup(popup) {
 function editProfile() {
   nickname.textContent = popupProfileInputNickname.value;
   profession.textContent = popupProfileInputProfession.value;
-
-  // closePopup(popupProfile);
 }
 
 //Валидация
@@ -118,8 +109,6 @@ function addCards(card = initialCards) {
 addCards();
 
 //Слушатели событий
-// PopupProfileClass.setEventListeners();
-// popupMestoClass.setEventListeners();
 popupImageClass.setEventListeners();
 
 PopupProfileWithFormClass.setEventListeners();
@@ -133,11 +122,4 @@ buttonAddСards.addEventListener("click", () => {
   openPopupMesto();
 });
 
-// popupMesto.querySelector(".form").addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-//   addCards([{ name: popupMestoInputTitle.value, link: popupMestoInputLink.value }]);
-// });
-
-//Экспорт
-export /* openPopupImage, */
-/* addCards */ {};
+export {};

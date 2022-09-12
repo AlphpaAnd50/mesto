@@ -1,9 +1,5 @@
 // ИМПОРТ
 
-//src
-// import { openPopupImage } from "../src/pages/index.js";
-// Переменне
-
 //КЛАСС
 
 export default class Card {
