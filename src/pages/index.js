@@ -24,19 +24,19 @@ import {
   PopupProfileClass,
   popupMestoClass,
   popupImageClass,
-  UserInfoClass,
+  userInfoClass,
 } from "../../utils/constants.js";
 
 //??????
-const PopupProfileWithFormClass = new PopupWithForm(popupProfile, {
-  formSubmit: (nameNew, jobNew) => {
-    UserInfoClass.setUserInfo({ nameNew, jobNew });
+const profilePopup = new PopupWithForm(popupProfile, {
+  formSubmit: ({ nickname, profession }) => {
+    userInfoClass.setUserInfo({ nickname, profession });
   },
 });
 
-const popupMestoWithFormClass = new PopupWithForm(popupMesto, {
-  formSubmit: (name, link) => {
-    addCards([{ name: name, link: link }]);
+const mestoPopup = new PopupWithForm(popupMesto, {
+  formSubmit: ({ title, link }) => {
+    addCards([{ name: title, link: link }]);
   },
 });
 
@@ -46,38 +46,19 @@ const popupMestoWithFormClass = new PopupWithForm(popupMesto, {
 
 //Попап профиль
 function openPopupProfile() {
-  UserInfoClass.getUserInfo();
-  popupProfileInputNickname.value = UserInfoClass.getUserInfo().name;
-  popupProfileInputProfession.value = UserInfoClass.getUserInfo().job;
+  userInfoClass.getUserInfo();
+  popupProfileInputNickname.value = userInfoClass.getUserInfo().name;
+  popupProfileInputProfession.value = userInfoClass.getUserInfo().job;
 
-  PopupProfileClass.open();
+  profilePopup.open();
   formChangeProfile.resetValidation();
 }
 
 //Попап место
 function openPopupMesto() {
-  popupMestoClass.open();
+  mestoPopup.open();
   formAddMesto.resetValidation();
 }
-
-//Функция закрытия попапов
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-}
-
-//Функция редактирования профиля
-function editProfile() {
-  nickname.textContent = popupProfileInputNickname.value;
-  profession.textContent = popupProfileInputProfession.value;
-}
-
-//Валидация
-function Validator() {
-  formChangeProfile.enableValidation();
-  formAddMesto.enableValidation();
-}
-
-Validator();
 
 // Карточки
 function addCards(card = initialCards) {
@@ -89,15 +70,13 @@ function addCards(card = initialCards) {
           {
             data,
             handleCardClick: (link, text) => {
-              const popupImageWithImageClass = new PopupWithImage(popupImage, link, text);
-              popupImageWithImageClass.open();
+              const popupImageWithImage = new PopupWithImage(popupImage, link, text);
+              popupImageWithImage.open();
             },
           },
           "#element-template"
         );
-
         const cardElement = cardClass.generateCard();
-
         sectionClass.addItem(cardElement);
       },
     },
@@ -108,11 +87,15 @@ function addCards(card = initialCards) {
 
 addCards();
 
+//Валидация
+formChangeProfile.enableValidation();
+formAddMesto.enableValidation();
+
 //Слушатели событий
 popupImageClass.setEventListeners();
 
-PopupProfileWithFormClass.setEventListeners();
-popupMestoWithFormClass.setEventListeners();
+profilePopup.setEventListeners();
+mestoPopup.setEventListeners();
 
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile();
@@ -121,5 +104,3 @@ buttonEditProfile.addEventListener("click", () => {
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto();
 });
-
-export {};

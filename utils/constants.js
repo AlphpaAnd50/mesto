@@ -26,11 +26,12 @@ export const cards = document.querySelector(".elements");
 export const formChangeProfile = new FormValidator(config, changeProfile);
 export const formAddMesto = new FormValidator(config, addMesto);
 
-export const PopupProfileClass = new Popup(popupProfile);
-export const popupMestoClass = new Popup(popupMesto);
 export const popupImageClass = new Popup(popupImage);
 
-export const UserInfoClass = new UserInfo({ userNameSelector: nickname, userDescriptionSelector: profession });
+export const userInfoClass = new UserInfo({
+  userNameSelector: nickname,
+  userDescriptionSelector: profession,
+});
 
 export const initialCards = [
   {

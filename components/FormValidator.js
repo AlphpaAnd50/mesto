@@ -1,8 +1,5 @@
 // ИМПОРТ
 
-//src
-import {} from "../src/pages/index.js";
-
 //КЛАСС
 
 export const config = {
@@ -15,8 +12,8 @@ export const config = {
 
 export class FormValidator {
   constructor(config, validationForm) {
-    this._inputSelector = Array.from(validationForm.querySelectorAll(config.inputSelector));
-    this._submitButtonSelector = validationForm.querySelector(config.submitButtonSelector);
+    this._input = Array.from(validationForm.querySelectorAll(config.inputSelector));
+    this._submitButton = validationForm.querySelector(config.submitButtonSelector);
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
@@ -31,7 +28,7 @@ export class FormValidator {
   resetValidation() {
     this._toggleButtonState();
 
-    this._inputSelector.forEach((inputElement) => {
+    this._input.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
   }
@@ -62,16 +59,16 @@ export class FormValidator {
   //Функция переключениу состояний кнопки
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._submitButtonSelector.classList.add(this._inactiveButtonClass);
-      this._submitButtonSelector.disabled = true;
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
     } else {
-      this._submitButtonSelector.classList.remove(this._inactiveButtonClass);
-      this._submitButtonSelector.disabled = false;
+      this._submitButton.classList.remove(this._inactiveButtonClass);
+      this._submitButton.disabled = false;
     }
   }
   //Функция проверка на валидность
   _hasInvalidInput() {
-    return this._inputSelector.some((inputElement) => {
+    return this._input.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
@@ -81,7 +78,7 @@ export class FormValidator {
       evt.preventDefault();
     });
 
-    this._inputSelector.forEach((inputElement) => {
+    this._input.forEach((inputElement) => {
       this._toggleButtonState();
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
