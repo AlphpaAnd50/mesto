@@ -1,12 +1,13 @@
-// ИМПОРТ
+// ИМПОРТ------------------------------------------------------------------------------------------
 import "./index.css";
 
-//компоненты
+// Компоненты
 import Card from "../../components/Сard.js";
 import Section from "../../components/Section.js";
-import PopupWithImage from "../../components/PopupWithImage.js";
 import PopupWithForm from "../../components/PopupWithForm.js";
-// Переменне
+//-------------------------------------------------------------------------------------------------
+
+// Переменне---------------------------------------------------------------------------------------
 import {
   nickname,
   profession,
@@ -25,74 +26,77 @@ import {
   popupMestoClass,
   popupImageClass,
   userInfoClass,
+  popupImageWithImage,
 } from "../../utils/constants.js";
+//-------------------------------------------------------------------------------------------------
 
-//??????
+// Открытие попапов--------------------------------------------------------------------------------
+// Профиль
+function openPopupProfile() {
+  userInfoClass.getUserInfo();
+  popupProfileInputNickname.value = userInfoClass.getUserInfo().name;
+  popupProfileInputProfession.value = userInfoClass.getUserInfo().job;
+  profilePopup.open();
+  formChangeProfile.resetValidation();
+}
+
+// Место
+const mestoPopup = new PopupWithForm(popupMesto, {
+  formSubmit: ({ title, link }) => {
+    addCards({ name: title, link: link });
+  },
+});
+//-------------------------------------------------------------------------------------------------
+
+// Сабмит попапов----------------------------------------------------------------------------------
+// Профиль
 const profilePopup = new PopupWithForm(popupProfile, {
   formSubmit: ({ nickname, profession }) => {
     userInfoClass.setUserInfo({ nickname, profession });
   },
 });
 
-const mestoPopup = new PopupWithForm(popupMesto, {
-  formSubmit: ({ title, link }) => {
-    addCards([{ name: title, link: link }]);
-  },
-});
-
-//ФУНКЦИИ
-
-//Функции открытия попапов
-
-//Попап профиль
-function openPopupProfile() {
-  userInfoClass.getUserInfo();
-  popupProfileInputNickname.value = userInfoClass.getUserInfo().name;
-  popupProfileInputProfession.value = userInfoClass.getUserInfo().job;
-
-  profilePopup.open();
-  formChangeProfile.resetValidation();
-}
-
-//Попап место
+//Место
 function openPopupMesto() {
   mestoPopup.open();
   formAddMesto.resetValidation();
 }
-// Карточки
-function addCards(card = initialCards) {
-  const sectionClass = new Section(
+//-------------------------------------------------------------------------------------------------
+
+// Карточки----------------------------------------------------------------------------------------
+// Создание карточек
+const sectionClass = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      addCards(data);
+    },
+  },
+  cards
+);
+sectionClass.renderItems();
+
+// Создание карточки
+function addCards(data) {
+  const cardClass = new Card(
     {
-      items: card,
-      renderer: (data) => {
-        const cardClass = new Card(
-          {
-            data,
-            handleCardClick: (link, text) => {
-              const popupImageWithImage = new PopupWithImage(popupImage, link, text);
-              popupImageWithImage.open();
-            },
-          },
-          "#element-template"
-        );
-        const cardElement = cardClass.generateCard();
-        sectionClass.addItem(cardElement);
+      data,
+      handleCardClick: (link, text) => {
+        popupImageWithImage.open(link, text);
       },
     },
-    cards
+    "#element-template"
   );
-  sectionClass.renderItems();
+  const cardElement = cardClass.generateCard();
+  sectionClass.addItem(cardElement);
 }
+//-------------------------------------------------------------------------------------------------
 
-function addCards(card = initialCards)
-
-addCards();
-
-//Валидация
+// Валидация
 formChangeProfile.enableValidation();
 formAddMesto.enableValidation();
 
-//Слушатели событий
+// Слушатели событий-------------------------------------------------------------------------------
 popupImageClass.setEventListeners();
 
 profilePopup.setEventListeners();
@@ -105,3 +109,4 @@ buttonEditProfile.addEventListener("click", () => {
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto();
 });
+//-------------------------------------------------------------------------------------------------

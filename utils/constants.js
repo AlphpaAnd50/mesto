@@ -1,6 +1,7 @@
 import { FormValidator, config } from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 export const nickname = document.querySelector(".profile__nickname");
 export const profession = document.querySelector(".profile__profession");
@@ -22,6 +23,8 @@ export const image = popupImage.querySelector(".popup__image");
 export const textImage = popupImage.querySelector(".popup__image-text");
 
 export const cards = document.querySelector(".elements");
+
+export const popupImageWithImage = new PopupWithImage(popupImage);
 
 export const formChangeProfile = new FormValidator(config, changeProfile);
 export const formAddMesto = new FormValidator(config, addMesto);
