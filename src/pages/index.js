@@ -59,7 +59,7 @@ function openPopupMesto() {
   mestoPopup.open();
   formAddMesto.resetValidation();
 }
-
+// card = initialCards
 // Карточки
 function addCards(card = initialCards) {
   const sectionClass = new Section(
