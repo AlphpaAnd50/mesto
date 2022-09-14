@@ -3,7 +3,7 @@
 //КЛАСС
 
 export default class Card {
-  constructor({ data , handleCardClick}, selectorTemplate) {
+  constructor({ data, handleCardClick }, selectorTemplate) {
     this._name = data.name;
     this._link = data.link;
 
@@ -31,6 +31,15 @@ export default class Card {
 
     return this._element;
   }
+
+  likeButton(evt) {
+    evt.target.classList.toggle("element__like-button_active");
+  }
+
+  cardDeletion(evt) {
+    evt.target.closest(".element").remove();
+  }
+
   // Слушатели
   _setEventListeners() {
     const image = this._element.querySelector(".element__image");
@@ -42,11 +51,11 @@ export default class Card {
     });
     // Лайк
     likeButton.addEventListener("click", (evt) => {
-      evt.target.classList.toggle("element__like-button_active");
+      this.likeButton(evt);
     });
     // Удаление карточки
     removeButton.addEventListener("click", (evt) => {
-      evt.target.closest(".element").remove();
+      this.cardDeletion(evt)
     });
   }
 }

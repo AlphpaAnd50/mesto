@@ -9,22 +9,16 @@ import PopupWithForm from "../../components/PopupWithForm.js";
 
 // Переменне---------------------------------------------------------------------------------------
 import {
-  nickname,
-  profession,
   buttonEditProfile,
   buttonAddСards,
   popupProfile,
   popupProfileInputNickname,
   popupProfileInputProfession,
   popupMesto,
-  popupImage,
   cards,
   formChangeProfile,
   formAddMesto,
   initialCards,
-  PopupProfileClass,
-  popupMestoClass,
-  popupImageClass,
   userInfoClass,
   popupImageWithImage,
 } from "../../utils/constants.js";
@@ -97,8 +91,7 @@ formChangeProfile.enableValidation();
 formAddMesto.enableValidation();
 
 // Слушатели событий-------------------------------------------------------------------------------
-popupImageClass.setEventListeners();
-
+popupImageWithImage.setEventListeners();
 profilePopup.setEventListeners();
 mestoPopup.setEventListeners();
 
