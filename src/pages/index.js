@@ -11,6 +11,9 @@ import PopupWithForm from "../../components/PopupWithForm.js";
 import {
   buttonEditProfile,
   buttonAddСards,
+  avatar,
+  nickname,
+  profession,
   popupProfile,
   popupProfileInputNickname,
   popupProfileInputProfession,
@@ -102,4 +105,38 @@ buttonEditProfile.addEventListener("click", () => {
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto();
 });
+//-------------------------------------------------------------------------------------------------
+
+// Запросы-----------------------------------------------------------------------------------------
+// Информация о пользователе
+fetch("https://nomoreparties.co/v1/cohort-51/users/me", {
+  headers: {
+    authorization: "24ace598-6ee1-43a3-ab45-9d4737e73407",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    avatar.src = result.avatar;
+    nickname.textContent = result.name;
+    profession.textContent = result.about;
+  })
+  .catch((err) => {
+    console.log(`userInf ${err}`);
+  });
+
+// Карточки
+/* fetch("https://mesto.nomoreparties.co/v1/cohort-51/cards", {
+  headers: {
+    authorization: "24ace598-6ee1-43a3-ab45-9d4737e73407",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    result.forEach((element) => {
+      addCards(element);
+    });
+  })
+  .catch((err) => {
+    console.log(`userInf ${err}`);
+  }); */
 //-------------------------------------------------------------------------------------------------

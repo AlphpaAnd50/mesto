@@ -2,6 +2,7 @@ import { FormValidator, config } from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
+export const avatar = document.querySelector(".profile__avatar");
 export const nickname = document.querySelector(".profile__nickname");
 export const profession = document.querySelector(".profile__profession");
 
