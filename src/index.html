@@ -80,8 +80,16 @@
     <div class="popup__container-image">
       <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
       <img class="popup__image"  src="#" alt="">
-    <h3 class="popup__image-text"></h3>
+      <h3 class="popup__image-text"></h3>
+    </div>
   </div>
+
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+      <h3 class="popup__text">Вы уверены?</h3>
+      <button class="form__save-button" type="submit">Да</button>
+    </div>
   </div>
 
 <footer class="footer"><p class="footer__copyright">© 2020 Mesto Russia</p></footer>
@@ -91,7 +99,10 @@
     <button class="element__delete-button"></button>
     <img class="element__image" src="#" alt="">
     <h2 class="element__text"></h2>
-    <button class="element__like-button" type="button" aria-label="Нравится"></button>
+    <div class="element__like">
+      <button class="element__like-button" type="button" aria-label="Нравится"></button>
+      <p class="element__likes-nombre">1</p>
+    </div>
   </article>
 </template>
 

@@ -18,14 +18,47 @@ import {
   popupProfileInputNickname,
   popupProfileInputProfession,
   popupMesto,
+  popupDeleteCard,
   cards,
   formChangeProfile,
   formAddMesto,
   initialCards,
   userInfoClass,
   popupImageWithImage,
+  api,
 } from "../../utils/constants.js";
 //-------------------------------------------------------------------------------------------------
+
+// Запросы-----------------------------------------------------------------------------------------
+const promiseUserInfo = new Promise((resolve, reject) => {
+  resolve(api.getUserInfo());
+})
+  .then((result) => {
+    avatar.src = result.avatar;
+    nickname.textContent = result.name;
+    profession.textContent = result.about;
+    return result;
+  })
+  .catch((error) => {
+    console.log(`promiseUserInfo ${error}`);
+  });
+
+const promiseCards = new Promise((resolve, reject) => {
+  resolve(api.getInitialCards());
+})
+  .then((result) => {
+    creatCards(result);
+    return result;
+  })
+  .catch((error) => {
+    console.log(`promiseCards ${error}`);
+  });
+
+// api.patchUserInfo({ name: "Marie Skłodowska Curie", about: "Physicist and Chemist" });
+/* api.patchNewCards({
+  name: "Байкал",
+  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+}); */
 
 // Открытие попапов--------------------------------------------------------------------------------
 // Профиль
@@ -37,22 +70,6 @@ function openPopupProfile() {
   formChangeProfile.resetValidation();
 }
 
-// Место
-const mestoPopup = new PopupWithForm(popupMesto, {
-  formSubmit: ({ title, link }) => {
-    addCards({ name: title, link: link });
-  },
-});
-//-------------------------------------------------------------------------------------------------
-
-// Сабмит попапов----------------------------------------------------------------------------------
-// Профиль
-const profilePopup = new PopupWithForm(popupProfile, {
-  formSubmit: ({ nickname, profession }) => {
-    userInfoClass.setUserInfo({ nickname, profession });
-  },
-});
-
 //Место
 function openPopupMesto() {
   mestoPopup.open();
@@ -60,33 +77,57 @@ function openPopupMesto() {
 }
 //-------------------------------------------------------------------------------------------------
 
+// Сабмит попапов----------------------------------------------------------------------------------
+// Профиль
+const profilePopup = new PopupWithForm(popupProfile, {
+  formSubmit: ({ nickname, profession }) => {
+    userInfoClass.setUserInfo({ nickname, profession });
+    api.patchUserInfo({ name: nickname, about: profession });
+  },
+});
+
+// Место
+const mestoPopup = new PopupWithForm(popupMesto, {
+  formSubmit: ({ title, link }) => {
+    // addCards({ name: title, link: link });
+    api.patchNewCards({
+      name: title,
+      link: link,
+    });
+  },
+});
+//-------------------------------------------------------------------------------------------------
+
 // Карточки----------------------------------------------------------------------------------------
 // Создание карточек
-const sectionClass = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      addCards(data);
-    },
-  },
-  cards
-);
-sectionClass.renderItems();
-
-// Создание карточки
-function addCards(data) {
-  const cardClass = new Card(
+function creatCards(result) {
+  const sectionClass = new Section(
     {
-      data,
-      handleCardClick: (link, text) => {
-        popupImageWithImage.open(link, text);
+      items: result,
+      renderer: (data) => {
+        addCards(data);
       },
     },
-    "#element-template"
+    cards
   );
-  const cardElement = cardClass.generateCard();
-  sectionClass.addItem(cardElement);
+  sectionClass.renderItems();
+
+  // Создание карточки
+  function addCards(data) {
+    const cardClass = new Card(
+      {
+        data,
+        handleCardClick: (link, text) => {
+          popupImageWithImage.open(link, text);
+        },
+      },
+      "#element-template"
+    );
+    const cardElement = cardClass.generateCard();
+    sectionClass.addItem(cardElement);
+  }
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Валидация
@@ -98,6 +139,8 @@ popupImageWithImage.setEventListeners();
 profilePopup.setEventListeners();
 mestoPopup.setEventListeners();
 
+popupDeleteCard.setEventListeners()
+
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile();
 });
@@ -105,38 +148,4 @@ buttonEditProfile.addEventListener("click", () => {
 buttonAddСards.addEventListener("click", () => {
   openPopupMesto();
 });
-//-------------------------------------------------------------------------------------------------
-
-// Запросы-----------------------------------------------------------------------------------------
-// Информация о пользователе
-fetch("https://nomoreparties.co/v1/cohort-51/users/me", {
-  headers: {
-    authorization: "24ace598-6ee1-43a3-ab45-9d4737e73407",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    avatar.src = result.avatar;
-    nickname.textContent = result.name;
-    profession.textContent = result.about;
-  })
-  .catch((err) => {
-    console.log(`userInf ${err}`);
-  });
-
-// Карточки
-/* fetch("https://mesto.nomoreparties.co/v1/cohort-51/cards", {
-  headers: {
-    authorization: "24ace598-6ee1-43a3-ab45-9d4737e73407",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    result.forEach((element) => {
-      addCards(element);
-    });
-  })
-  .catch((err) => {
-    console.log(`userInf ${err}`);
-  }); */
 //-------------------------------------------------------------------------------------------------

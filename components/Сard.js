@@ -1,11 +1,12 @@
 // ИМПОРТ
-
+import { popupDeleteCard } from "../utils/constants.js";
 //КЛАСС
 
 export default class Card {
   constructor({ data, handleCardClick }, selectorTemplate) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes.length;
 
     this._handleCardClick = handleCardClick;
 
@@ -28,16 +29,19 @@ export default class Card {
     this._element.querySelector(".element__text").textContent = this._name;
     this._element.querySelector(".element__image").alt = this._name;
     this._element.querySelector(".element__image").src = this._link;
+    this._element.querySelector(".element__likes-nombre").textContent = this._likes;
+
 
     return this._element;
   }
-
+  // Лайк
   likeButton(evt) {
     evt.target.classList.toggle("element__like-button_active");
   }
-
+  // Удаление
   cardDeletion(evt) {
-    evt.target.closest(".element").remove();
+    popupDeleteCard.open()
+    // evt.target.closest(".element").remove();
   }
 
   // Слушатели
@@ -55,7 +59,7 @@ export default class Card {
     });
     // Удаление карточки
     removeButton.addEventListener("click", (evt) => {
-      this.cardDeletion(evt)
+      this.cardDeletion(evt);
     });
   }
 }
