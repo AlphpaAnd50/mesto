@@ -1,5 +1,6 @@
 // ИМПОРТ
-import { popupDeleteCard } from "../utils/constants.js";
+import { popupDeleteCard, popupDelete } from "../utils/constants.js";
+import PopupDeleteCard from "./PopupWithConfirmation.js";
 //КЛАСС
 
 export default class Card {
@@ -7,6 +8,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
+    this._id = data.owner._id;
 
     this._handleCardClick = handleCardClick;
 
@@ -31,7 +33,6 @@ export default class Card {
     this._element.querySelector(".element__image").src = this._link;
     this._element.querySelector(".element__likes-nombre").textContent = this._likes;
 
-
     return this._element;
   }
   // Лайк
@@ -40,7 +41,12 @@ export default class Card {
   }
   // Удаление
   cardDeletion(evt) {
-    popupDeleteCard.open()
+    popupDeleteCard.open();
+
+    // if (confirm(evt)) {
+
+    // }
+
     // evt.target.closest(".element").remove();
   }
 

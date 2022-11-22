@@ -1,6 +1,6 @@
 import { FormValidator, config } from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
-import PopupDeleteCard from "../components/PopupDeleteCard.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Api from "../components/Api.js";
 
@@ -25,7 +25,7 @@ export const popupDelete = document.querySelector(".popup_type_delete");
 
 export const cards = document.querySelector(".elements");
 
-export const popupDeleteCard = new PopupDeleteCard(popupDelete);
+export const popupDeleteCard = new PopupWithConfirmation(popupDelete);
 
 export const popupImageWithImage = new PopupWithImage(popupImage);
 

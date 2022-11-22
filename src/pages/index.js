@@ -30,6 +30,7 @@ import {
 //-------------------------------------------------------------------------------------------------
 
 // Запросы-----------------------------------------------------------------------------------------
+// Инормация о пользователи
 const promiseUserInfo = new Promise((resolve, reject) => {
   resolve(api.getUserInfo());
 })
@@ -43,6 +44,7 @@ const promiseUserInfo = new Promise((resolve, reject) => {
     console.log(`promiseUserInfo ${error}`);
   });
 
+// Карточки
 const promiseCards = new Promise((resolve, reject) => {
   resolve(api.getInitialCards());
 })
@@ -59,6 +61,7 @@ const promiseCards = new Promise((resolve, reject) => {
   name: "Байкал",
   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
 }); */
+//-------------------------------------------------------------------------------------------------
 
 // Открытие попапов--------------------------------------------------------------------------------
 // Профиль
@@ -139,7 +142,7 @@ popupImageWithImage.setEventListeners();
 profilePopup.setEventListeners();
 mestoPopup.setEventListeners();
 
-popupDeleteCard.setEventListeners()
+popupDeleteCard.setEventListeners();
 
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile();
