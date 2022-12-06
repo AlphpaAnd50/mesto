@@ -7,9 +7,14 @@ import Api from "../components/Api.js";
 export const avatar = document.querySelector(".profile__avatar");
 export const nickname = document.querySelector(".profile__nickname");
 export const profession = document.querySelector(".profile__profession");
+export const userId = document.querySelector(".profile__id");
 
+export const buttonEditAvatar = document.querySelector(".profile__avatar-edit");
 export const buttonEditProfile = document.querySelector(".profile__edit-button");
 export const buttonAddСards = document.querySelector(".profile__add-button");
+
+export const popupAvatarEbit = document.querySelector(".popup_type_avatar");
+export const popupAvatarEbitInput = popupAvatarEbit.querySelector("#avatar-input")
 
 export const popupProfile = document.querySelector(".popup_type_profile");
 export const popupProfileInputNickname = popupProfile.querySelector("#nickname-input");
@@ -29,10 +34,12 @@ export const popupDeleteCard = new PopupWithConfirmation(popupDelete);
 
 export const popupImageWithImage = new PopupWithImage(popupImage);
 
+export const formAvatarEdit = new FormValidator(config, avatarEdit);
 export const formChangeProfile = new FormValidator(config, changeProfile);
 export const formAddMesto = new FormValidator(config, addMesto);
 
 export const userInfoClass = new UserInfo({
+  userAvatarSelector: avatar,
   userNameSelector: nickname,
   userDescriptionSelector: profession,
 });

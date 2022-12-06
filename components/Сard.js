@@ -1,16 +1,19 @@
 // ИМПОРТ
-import { popupDeleteCard, popupDelete } from "../utils/constants.js";
-import PopupDeleteCard from "./PopupWithConfirmation.js";
+import { popupDeleteCard, api } from "../utils/constants.js";
 //КЛАСС
 
 export default class Card {
-  constructor({ data, handleCardClick }, selectorTemplate) {
+  constructor({ data, handleCardClick, handleDeleteClick }, selectorTemplate, userId) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes.length;
-    this._id = data.owner._id;
+    this._likes = data.likes;
+    this._ownerId = data.owner._id;
+    this._cardId = data._id;
+    this._userId = userId.textContent;
 
     this._handleCardClick = handleCardClick;
+
+    this._handleDeleteClick = handleDeleteClick;
 
     this._selectorTemplate = selectorTemplate;
   }
@@ -31,23 +34,40 @@ export default class Card {
     this._element.querySelector(".element__text").textContent = this._name;
     this._element.querySelector(".element__image").alt = this._name;
     this._element.querySelector(".element__image").src = this._link;
-    this._element.querySelector(".element__likes-nombre").textContent = this._likes;
+    this._element.querySelector(".element__likes-nombre").textContent = this._likes.length;
+
+    if (this._ownerId !== this._userId) {
+      this._element
+        .querySelector(".element__delete-button")
+        .classList.add("element__delete-button_inactive");
+    }
+
+    this._likes.forEach((element) => {
+      if (this._userId == element._id) {
+        this._element
+          .querySelector(".element__like-button")
+          .classList.add("element__like-button_active");
+      }
+    });
 
     return this._element;
   }
+
   // Лайк
   likeButton(evt) {
-    evt.target.classList.toggle("element__like-button_active");
+    if (this._element.querySelector(".element__like-button_active") == null) {
+      api.putLike(this._cardId);
+    } else {
+      api.deleteLike(this._cardId);
+    }
+
+    // evt.target.classList.toggle("element__like-button_active");
   }
+
   // Удаление
-  cardDeletion(evt) {
-    popupDeleteCard.open();
-
-    // if (confirm(evt)) {
-
-    // }
-
-    // evt.target.closest(".element").remove();
+  deletionCard() {
+    // popupDeleteCard.open();
+    this._handleDeleteClick(this._cardId);
   }
 
   // Слушатели
@@ -64,8 +84,8 @@ export default class Card {
       this.likeButton(evt);
     });
     // Удаление карточки
-    removeButton.addEventListener("click", (evt) => {
-      this.cardDeletion(evt);
+    removeButton.addEventListener("click", () => {
+      this.deletionCard();
     });
   }
 }

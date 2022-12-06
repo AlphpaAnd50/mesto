@@ -1,25 +1,26 @@
 import Popup from "./Popup.js";
+import { api } from "../utils/constants.js";
 
 export default class PopupWithConfirmation extends Popup {
   constructor(popup) {
     super(popup);
   }
 
-  open() {
+  open(id) {
     super.open();
+    this._id = id;
   }
 
-  close(/* evt */) {
-    super.close();
-    // evt.target.closest(".element").remove();
+  delete() {
+    api.deleteCards(this._id);
+    this.close();
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._popup.querySelector(".form").addEventListener("submit", (evt) => {
-      console.log(evt);
       evt.preventDefault();
-      this.close(/* evt */);
+      this.delete();
     });
   }
 }

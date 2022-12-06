@@ -9,20 +9,24 @@ import PopupWithForm from "../../components/PopupWithForm.js";
 
 // Переменне---------------------------------------------------------------------------------------
 import {
+  buttonEditAvatar,
   buttonEditProfile,
   buttonAddСards,
   avatar,
   nickname,
   profession,
+  userId,
+  popupAvatarEbit,
   popupProfile,
+  popupAvatarEbitInput,
   popupProfileInputNickname,
   popupProfileInputProfession,
   popupMesto,
   popupDeleteCard,
   cards,
+  formAvatarEdit,
   formChangeProfile,
   formAddMesto,
-  initialCards,
   userInfoClass,
   popupImageWithImage,
   api,
@@ -38,6 +42,7 @@ const promiseUserInfo = new Promise((resolve, reject) => {
     avatar.src = result.avatar;
     nickname.textContent = result.name;
     profession.textContent = result.about;
+    userId.textContent = result._id;
     return result;
   })
   .catch((error) => {
@@ -61,9 +66,20 @@ const promiseCards = new Promise((resolve, reject) => {
   name: "Байкал",
   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
 }); */
+// api.deleteCards("637ca36685aeea1779bdd057")
+// api.patchUserAvatar({ avatar: "https://i.playground.ru/i/pix/1478431/image.jpg" });
+
 //-------------------------------------------------------------------------------------------------
 
 // Открытие попапов--------------------------------------------------------------------------------
+// Аватар
+function openPopupAvatar() {
+  userInfoClass.getUserInfo();
+  popupAvatarEbitInput.value = userInfoClass.getUserInfo().avatar;
+  avatarEditPopup.open();
+  formAvatarEdit.resetValidation();
+}
+
 // Профиль
 function openPopupProfile() {
   userInfoClass.getUserInfo();
@@ -81,11 +97,24 @@ function openPopupMesto() {
 //-------------------------------------------------------------------------------------------------
 
 // Сабмит попапов----------------------------------------------------------------------------------
+// Аватар
+const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
+  formSubmit: ({ avatar }) => {
+    userInfoClass.setUserAvatar({ avatar });
+    api.patchUserAvatar({
+      avatar,
+    });
+  },
+});
+
 // Профиль
 const profilePopup = new PopupWithForm(popupProfile, {
   formSubmit: ({ nickname, profession }) => {
     userInfoClass.setUserInfo({ nickname, profession });
-    api.patchUserInfo({ name: nickname, about: profession });
+    api.patchUserInfo({
+      name: nickname,
+      about: profession,
+    });
   },
 });
 
@@ -123,8 +152,12 @@ function creatCards(result) {
         handleCardClick: (link, text) => {
           popupImageWithImage.open(link, text);
         },
+        handleDeleteClick: (cardId) => {
+          popupDeleteCard.open(cardId);
+        },
       },
-      "#element-template"
+      "#element-template",
+      userId
     );
     const cardElement = cardClass.generateCard();
     sectionClass.addItem(cardElement);
@@ -134,15 +167,21 @@ function creatCards(result) {
 //-------------------------------------------------------------------------------------------------
 
 // Валидация
+formAvatarEdit.enableValidation();
 formChangeProfile.enableValidation();
 formAddMesto.enableValidation();
 
 // Слушатели событий-------------------------------------------------------------------------------
-popupImageWithImage.setEventListeners();
+avatarEditPopup.setEventListeners()
 profilePopup.setEventListeners();
 mestoPopup.setEventListeners();
+popupImageWithImage.setEventListeners();
 
 popupDeleteCard.setEventListeners();
+
+buttonEditAvatar.addEventListener("click", () => {
+  openPopupAvatar();
+});
 
 buttonEditProfile.addEventListener("click", () => {
   openPopupProfile();
