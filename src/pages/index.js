@@ -96,12 +96,24 @@ function openPopupMesto() {
 }
 //-------------------------------------------------------------------------------------------------
 
+// Загрузка----------------------------------------------------------------------------------------
+
+function loading(popup, isLoading) {
+  if (isLoading) {
+    popup.querySelector(".form__save-button").textContent = "Сохранить...";
+  } else {
+    popup.querySelector(".form__save-button").textContent = "Сохранить";
+  }
+}
+
+//-------------------------------------------------------------------------------------------------
+
 // Сабмит попапов----------------------------------------------------------------------------------
 // Аватар
 const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
   formSubmit: ({ avatar }) => {
     userInfoClass.setUserAvatar({ avatar });
-    api.patchUserAvatar({
+    return api.patchUserAvatar({
       avatar,
     });
   },
@@ -111,7 +123,8 @@ const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
 const profilePopup = new PopupWithForm(popupProfile, {
   formSubmit: ({ nickname, profession }) => {
     userInfoClass.setUserInfo({ nickname, profession });
-    api.patchUserInfo({
+    // loading(popupProfile, true);
+    return api.patchUserInfo({
       name: nickname,
       about: profession,
     });
@@ -122,7 +135,7 @@ const profilePopup = new PopupWithForm(popupProfile, {
 const mestoPopup = new PopupWithForm(popupMesto, {
   formSubmit: ({ title, link }) => {
     // addCards({ name: title, link: link });
-    api.patchNewCards({
+    return api.patchNewCards({
       name: title,
       link: link,
     });
@@ -172,7 +185,7 @@ formChangeProfile.enableValidation();
 formAddMesto.enableValidation();
 
 // Слушатели событий-------------------------------------------------------------------------------
-avatarEditPopup.setEventListeners()
+avatarEditPopup.setEventListeners();
 profilePopup.setEventListeners();
 mestoPopup.setEventListeners();
 popupImageWithImage.setEventListeners();

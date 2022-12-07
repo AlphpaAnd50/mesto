@@ -43,8 +43,21 @@ export default class Api {
       });
   }
 
+  patchUserAvatar({ avatar }) {
+    return fetch("https://nomoreparties.co/v1/cohort-54/users/me/avatar", {
+      method: "PATCH",
+      headers: {
+        authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar,
+      }),
+    });
+  }
+
   patchUserInfo({ name, about }) {
-    fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
+    return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
       method: "PATCH",
       headers: {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
@@ -53,19 +66,6 @@ export default class Api {
       body: JSON.stringify({
         name,
         about,
-      }),
-    });
-  }
-
-  patchUserAvatar({ avatar }) {
-    fetch("https://nomoreparties.co/v1/cohort-54/users/me/avatar", {
-      method: "PATCH",
-      headers: {
-        authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        avatar,
       }),
     });
   }
