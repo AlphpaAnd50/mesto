@@ -96,18 +96,6 @@ function openPopupMesto() {
 }
 //-------------------------------------------------------------------------------------------------
 
-// Загрузка----------------------------------------------------------------------------------------
-
-function loading(popup, isLoading) {
-  if (isLoading) {
-    popup.querySelector(".form__save-button").textContent = "Сохранить...";
-  } else {
-    popup.querySelector(".form__save-button").textContent = "Сохранить";
-  }
-}
-
-//-------------------------------------------------------------------------------------------------
-
 // Сабмит попапов----------------------------------------------------------------------------------
 // Аватар
 const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
@@ -123,7 +111,6 @@ const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
 const profilePopup = new PopupWithForm(popupProfile, {
   formSubmit: ({ nickname, profession }) => {
     userInfoClass.setUserInfo({ nickname, profession });
-    // loading(popupProfile, true);
     return api.patchUserInfo({
       name: nickname,
       about: profession,
