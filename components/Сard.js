@@ -1,9 +1,5 @@
-// ИМПОРТ
-import { popupDeleteCard, api } from "../utils/constants.js";
-//КЛАСС
-
 export default class Card {
-  constructor({ data, handleCardClick, handleDeleteClick }, selectorTemplate, userId) {
+  constructor({ data, handleCardClick, handleDeleteClick }, selectorTemplate, userId, api) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -16,6 +12,8 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
 
     this._selectorTemplate = selectorTemplate;
+
+    this._api = api;
   }
   //Получение шаблона
   _getTemplate() {
@@ -56,9 +54,9 @@ export default class Card {
   // Лайк
   likeButton(evt) {
     if (this._element.querySelector(".element__like-button_active") == null) {
-      api.putLike(this._cardId);
+      this._api.putLike(this._cardId);
     } else {
-      api.deleteLike(this._cardId);
+      this._api.deleteLike(this._cardId);
     }
 
     // evt.target.classList.toggle("element__like-button_active");

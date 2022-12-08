@@ -3,23 +3,22 @@ export default class Api {
     this._options = options;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
   getUserInfo() {
     return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
       headers: {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка в получении информации о пользователе ${res.status}`);
-      })
+      .then(this._checkResponse)
       .then((result) => {
         return result;
-      })
-      .catch((err) => {
-        console.log(`getUserInfo ${err}`);
       });
   }
 
@@ -29,17 +28,9 @@ export default class Api {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка в получении начальных карт ${res.status}`);
-      })
+      .then(this._checkResponse)
       .then((result) => {
         return result;
-      })
-      .catch((err) => {
-        console.log(`getInitialCards ${err}`);
       });
   }
 
@@ -53,7 +44,7 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    });
+    }).then(this._checkResponse);
   }
 
   patchUserInfo({ name, about }) {
@@ -67,7 +58,7 @@ export default class Api {
         name,
         about,
       }),
-    });
+    }).then(this._checkResponse);
   }
 
   patchNewCards({ name, link }) {
@@ -82,7 +73,7 @@ export default class Api {
           name,
           link,
         }),
-      });
+      }).then(this._checkResponse);
     }
   }
 
@@ -93,7 +84,7 @@ export default class Api {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
         "Content-Type": "application/json",
       },
-    });
+    }).then(this._checkResponse);
   }
 
   putLike(id) {
@@ -103,7 +94,7 @@ export default class Api {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
         "Content-Type": "application/json",
       },
-    });
+    }).then(this._checkResponse);
   }
 
   deleteLike(id) {
@@ -113,6 +104,6 @@ export default class Api {
         authorization: "2ce3cd01-490d-4ef6-a8a9-6ccb9ba22850",
         "Content-Type": "application/json",
       },
-    });
+    }).then(this._checkResponse);
   }
 }

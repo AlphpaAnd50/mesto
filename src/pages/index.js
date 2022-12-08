@@ -157,7 +157,8 @@ function creatCards(result) {
         },
       },
       "#element-template",
-      userId
+      userId,
+      api
     );
     const cardElement = cardClass.generateCard();
     sectionClass.addItem(cardElement);
