@@ -1,5 +1,6 @@
 export default class Card {
   constructor({ data, handleCardClick, handleDeleteClick }, selectorTemplate, userId, api) {
+    console.log();
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -55,17 +56,20 @@ export default class Card {
   likeButton(evt) {
     if (this._element.querySelector(".element__like-button_active") == null) {
       this._api.putLike(this._cardId);
+      this._element.querySelector(".element__likes-nombre").textContent =
+        +this._element.querySelector(".element__likes-nombre").textContent + 1;
     } else {
       this._api.deleteLike(this._cardId);
+      this._element.querySelector(".element__likes-nombre").textContent -= 1;
     }
 
-    // evt.target.classList.toggle("element__like-button_active");
+    evt.target.classList.toggle("element__like-button_active");
   }
 
   // Удаление
-  deletionCard() {
-    // popupDeleteCard.open();
-    this._handleDeleteClick(this._cardId);
+  deletionCard(evt) {
+    this._handleDeleteClick(this._cardId, evt);
+    // evt.target.closest(".element").remove()
   }
 
   // Слушатели
@@ -82,8 +86,8 @@ export default class Card {
       this.likeButton(evt);
     });
     // Удаление карточки
-    removeButton.addEventListener("click", () => {
-      this.deletionCard();
+    removeButton.addEventListener("click", (evt) => {
+      this.deletionCard(evt);
     });
   }
 }

@@ -6,13 +6,15 @@ export default class PopupWithConfirmation extends Popup {
     super(popup);
   }
 
-  open(id) {
+  open(id, evt) {
     super.open();
     this._id = id;
+    this._evt = evt;
   }
 
   delete() {
     api.deleteCards(this._id);
+    this._evt.target.closest(".element").remove();
     this.close();
   }
 

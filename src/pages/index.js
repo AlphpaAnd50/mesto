@@ -121,11 +121,15 @@ const profilePopup = new PopupWithForm(popupProfile, {
 // Место
 const mestoPopup = new PopupWithForm(popupMesto, {
   formSubmit: ({ title, link }) => {
-    // addCards({ name: title, link: link });
-    return api.patchNewCards({
-      name: title,
-      link: link,
-    });
+    return api
+      .patchNewCards({
+        name: title,
+        link: link,
+      })
+      .then((result) => {
+        creatCards([result]);
+        // addCards(result);
+      });
   },
 });
 //-------------------------------------------------------------------------------------------------
@@ -137,32 +141,33 @@ function creatCards(result) {
     {
       items: result,
       renderer: (data) => {
-        addCards(data);
+        sectionClass.addItem(addCards(data));
       },
     },
     cards
   );
   sectionClass.renderItems();
+}
 
-  // Создание карточки
-  function addCards(data) {
-    const cardClass = new Card(
-      {
-        data,
-        handleCardClick: (link, text) => {
-          popupImageWithImage.open(link, text);
-        },
-        handleDeleteClick: (cardId) => {
-          popupDeleteCard.open(cardId);
-        },
+// Создание карточки
+function addCards(data) {
+  const cardClass = new Card(
+    {
+      data,
+      handleCardClick: (link, text) => {
+        popupImageWithImage.open(link, text);
       },
-      "#element-template",
-      userId,
-      api
-    );
-    const cardElement = cardClass.generateCard();
-    sectionClass.addItem(cardElement);
-  }
+      handleDeleteClick: (cardId, evt) => {
+        popupDeleteCard.open(cardId, evt);
+      },
+    },
+    "#element-template",
+    userId,
+    api
+  );
+  const cardElement = cardClass.generateCard();
+  return cardElement;
+  // sectionClass.addItem(cardElement);
 }
 
 //-------------------------------------------------------------------------------------------------

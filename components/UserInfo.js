@@ -19,6 +19,6 @@ export default class UserInfo {
   }
 
   setUserAvatar({ avatar }) {
-    this._userAvatarSelector = avatar;
+    this._userAvatarSelector.src = avatar;
   }
 }
