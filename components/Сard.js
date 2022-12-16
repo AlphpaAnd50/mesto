@@ -33,7 +33,7 @@ export default class Card {
     this._element.querySelector(".element__text").textContent = this._name;
     this._element.querySelector(".element__image").alt = this._name;
     this._element.querySelector(".element__image").src = this._link;
-    this._element.querySelector(".element__likes-nombre").textContent = this._likes.length;
+    this._element.querySelector(".element__likes-number").textContent = this._likes.length;
 
     if (this._ownerId !== this._userId) {
       this._element
@@ -54,16 +54,19 @@ export default class Card {
 
   // Лайк
   likeButton(evt) {
-    if (this._element.querySelector(".element__like-button_active") == null) {
-      this._api.putLike(this._cardId);
-      this._element.querySelector(".element__likes-nombre").textContent =
-        +this._element.querySelector(".element__likes-nombre").textContent + 1;
-    } else {
-      this._api.deleteLike(this._cardId);
-      this._element.querySelector(".element__likes-nombre").textContent -= 1;
-    }
+    this._likesNumber = this._element.querySelector(".element__likes-number");
 
-    evt.target.classList.toggle("element__like-button_active");
+    if (this._element.querySelector(".element__like-button_active") == null) {
+      this._api.putLike(this._cardId).then((res) => {
+        evt.target.classList.add("element__like-button_active");
+        this._likesNumber.textContent = res.likes.length;
+      });
+    } else {
+      this._api.deleteLike(this._cardId).then((res) => {
+        evt.target.classList.remove("element__like-button_active");
+        this._likesNumber.textContent = res.likes.length;
+      });
+    }
   }
 
   // Удаление

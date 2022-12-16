@@ -10,13 +10,23 @@ export default class Popup {
   }
 
   close() {
-    document.querySelector(".popup_opened").classList.remove("popup_opened");
+    this._popup.classList.remove("popup_opened");
     document.removeEventListener("keyup", this._handleEscClose);
   }
 
   _handleEscClose({ key }) {
     if (key === "Escape") {
       this.close();
+    }
+  }
+
+  loading(isLoading) {
+    this._button =  this._popup.querySelector(".form__save-button")
+
+    if (isLoading) {
+      this._button.textContent += "...";
+    } else {
+      this._button.textContent = this._button.textContent.replace(/.{3}$/,"");
     }
   }
 

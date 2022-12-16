@@ -1,7 +1,3 @@
-// ИМПОРТ
-
-//КЛАСС
-
 export const config = {
   inputSelector: ".form__input",
   submitButtonSelector: ".form__save-button",

@@ -52,13 +52,17 @@ const promiseUserInfo = new Promise((resolve, reject) => {
 // Карточки
 const promiseCards = new Promise((resolve, reject) => {
   resolve(api.getInitialCards());
-})
+}).catch((error) => {
+  console.log(`promiseCards ${error}`);
+});
+
+// Все промесы
+Promise.all([promiseUserInfo, promiseCards])
   .then((result) => {
-    creatCards(result);
-    return result;
+    creatCards(result[1]);
   })
   .catch((error) => {
-    console.log(`promiseCards ${error}`);
+    console.log(`promiseAll ${error}`);
   });
 
 // api.patchUserInfo({ name: "Marie Skłodowska Curie", about: "Physicist and Chemist" });
@@ -74,17 +78,17 @@ const promiseCards = new Promise((resolve, reject) => {
 // Открытие попапов--------------------------------------------------------------------------------
 // Аватар
 function openPopupAvatar() {
-  userInfoClass.getUserInfo();
-  popupAvatarEbitInput.value = userInfoClass.getUserInfo().avatar;
+  const userInfo = userInfoClass.getUserInfo();
+  popupAvatarEbitInput.value = userInfo.avatar;
   avatarEditPopup.open();
   formAvatarEdit.resetValidation();
 }
 
 // Профиль
 function openPopupProfile() {
-  userInfoClass.getUserInfo();
-  popupProfileInputNickname.value = userInfoClass.getUserInfo().name;
-  popupProfileInputProfession.value = userInfoClass.getUserInfo().job;
+  const userInfo = userInfoClass.getUserInfo();
+  popupProfileInputNickname.value = userInfo.name;
+  popupProfileInputProfession.value = userInfo.job;
   profilePopup.open();
   formChangeProfile.resetValidation();
 }
@@ -100,21 +104,27 @@ function openPopupMesto() {
 // Аватар
 const avatarEditPopup = new PopupWithForm(popupAvatarEbit, {
   formSubmit: ({ avatar }) => {
-    userInfoClass.setUserAvatar({ avatar });
-    return api.patchUserAvatar({
-      avatar,
-    });
+    return api
+      .patchUserAvatar({
+        avatar,
+      })
+      .then(() => {
+        userInfoClass.setUserAvatar({ avatar });
+      });
   },
 });
 
 // Профиль
 const profilePopup = new PopupWithForm(popupProfile, {
   formSubmit: ({ nickname, profession }) => {
-    userInfoClass.setUserInfo({ nickname, profession });
-    return api.patchUserInfo({
-      name: nickname,
-      about: profession,
-    });
+    return api
+      .patchUserInfo({
+        name: nickname,
+        about: profession,
+      })
+      .then(() => {
+        userInfoClass.setUserInfo({ nickname, profession });
+      });
   },
 });
 
@@ -127,8 +137,7 @@ const mestoPopup = new PopupWithForm(popupMesto, {
         link: link,
       })
       .then((result) => {
-        creatCards([result]);
-        // addCards(result);
+        cards.prepend(addCards(result))
       });
   },
 });

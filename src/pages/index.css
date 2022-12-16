@@ -61,7 +61,7 @@
 @import url(../../blocks/element/__like/element__like.css);
 @import url(../../blocks/element/__delete-button/element__delete-button.css);
 @import url(../../blocks/element/__delete-button/_inactive/element__delete-button_inactive.css);
-@import url(../../blocks/element/__likes-nombre/element__likes-nombre.css);
+@import url(../../blocks/element/__likes-number/element__likes-number.css);
 
 /*_________________________________________________________ footer */
 

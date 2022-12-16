@@ -20,16 +20,6 @@ export default class PopupWithForm extends Popup {
     this._popup.querySelector(".form").reset();
   }
 
-  loading(isLoading) {
-    this._button =  this._popup.querySelector(".form__save-button")
-
-    if (isLoading) {
-      this._button.textContent += "...";
-    } else {
-      this._button.textContent = this._button.textContent.replace(/.{3}$/,"");
-    }
-  }
-
   setEventListeners() {
     super.setEventListeners();
     this._popup.querySelector(".form").addEventListener("submit", (evt) => {
@@ -38,11 +28,13 @@ export default class PopupWithForm extends Popup {
       this.loading(true);
 
       this._getInputValues();
-      this._formSubmit(this._formValues).finally(() => {
-        this.loading(false);
-      });
-
-      this.close();
+      this._formSubmit(this._formValues)
+        .then(() => {
+          this.close();
+        })
+        .finally(() => {
+          this.loading(false);
+        });
     });
   }
 }
